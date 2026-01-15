@@ -1,27 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
 
 // Importing the actual assets provided
 import imgSuit from "@assets/c84a8361-a995-43db-92d7-10b84a982d25_1768509073014.jpg";
-import imgElevator from "@assets/11ae7186-78fa-4535-bda9-9f49673464b8_1768509073013.jpg";
-import imgThrone from "@assets/Screenshot_20220523-125146_1768509073013.jpg";
+import imgElevator from "@assets/11ae7186-78fa-4535-bda9-9f49673464b8_1768510069389.jpg";
+import imgThrone from "@assets/Screenshot_20220523-125146_1768510093837.jpg";
 import imgShreyansh from "@assets/IMG_7691_1768509225161.jpg";
 import imgHari from "@assets/c84a8361-a995-43db-92d7-10b84a982d25_1768509245380.jpg";
 import imgSarthak from "@assets/Screenshot_20220523-125146_1768509327916.jpg";
 import imgAkshith from "@assets/image_1768509418497.png";
 import imgDevayan from "@assets/image_1768509448883.png";
-import imgLaser from "@assets/975709d9-04c6-45b1-a32a-995676c8c6ba_1768509073019.jpg";
-import imgJumpsuit from "@assets/6c806d63-2d1c-4858-8357-565a5d1edd2a_1768509073021.jpg";
-import imgBowling from "@assets/8c4b0d7a-78c3-446f-bac7-98e76eadd6b2_1768509073016.jpg";
-import imgGokart from "@assets/6021cc65-594f-47d0-ac98-f21e7e0675f8_1768509073018.jpg";
-import imgGroupStreet from "@assets/c2ec51ec-b946-4930-9426-53ad5caf5258_1768509073014.jpg";
-import imgGroupMirror from "@assets/a5e0418e-d725-458e-83a1-df6382d3c24e_1768509073014.jpg";
-import imgGroupNight from "@assets/92d3a763-5ca2-47b3-929a-a9dabcc832e5_1768509073019.jpg";
-import imgGroupSunny from "@assets/37207e98-1c28-448a-9bf7-87db4602d3b6_1768509073017.jpg";
+import imgLaser from "@assets/975709d9-04c6-45b1-a32a-995676c8c6ba_1768510093841.jpg";
+import imgLaser2 from "@assets/IMG_6315_1768510136872.jpg";
+import imgLaser3 from "@assets/IMG_6317_1768510136873.jpg";
+import imgJumpsuit from "@assets/6c806d63-2d1c-4858-8357-565a5d1edd2a_1768510093843.jpg";
+import imgBowling from "@assets/8c4b0d7a-78c3-446f-bac7-98e76eadd6b2_1768510093839.jpg";
+import imgGokart from "@assets/6021cc65-594f-47d0-ac98-f21e7e0675f8_1768510093840.jpg";
+import imgGroupStreet from "@assets/c2ec51ec-b946-4930-9426-53ad5caf5258_1768510093837.jpg";
+import imgGroupMirror from "@assets/a5e0418e-d725-458e-83a1-df6382d3c24e_1768510093838.jpg";
+import imgGroupNight from "@assets/92d3a763-5ca2-47b3-929a-a9dabcc832e5_1768510093841.jpg";
+import imgGroupSunny from "@assets/37207e98-1c28-448a-9bf7-87db4602d3b6_1768510093840.jpg";
+import imgPlayArena from "@assets/IMG_6329_1768510136874.jpg";
 
 import heroBg from "@assets/generated_images/abstract_aggressive_geometry_warning.png";
 
+// Slideshow data with sarcastic captions
+const slideshowImages = [
+  { src: imgElevator, caption: "Pre-gaming in the elevator because waiting is for losers", alt: "Elevator drinks" },
+  { src: imgThrone, caption: "Sarthak practicing for his future as a disappointed king", alt: "Throne pose" },
+  { src: imgGroupStreet, caption: "Lost tourists pretending they know where they're going", alt: "Street group" },
+  { src: imgGroupMirror, caption: "Taking mirror selfies like it's 2012", alt: "Mirror selfie" },
+  { src: imgBowling, caption: "Adults at Loco Bear pretending to be functional members of society", alt: "Bowling" },
+  { src: imgGroupSunny, caption: "The squad looking for food (a recurring theme)", alt: "Sunny group" },
+  { src: imgGokart, caption: "Proof that we're just overgrown children with money", alt: "Go kart" },
+  { src: imgGroupNight, caption: "2 AM and we've already made questionable decisions", alt: "Night group" },
+  { src: imgLaser, caption: "Tactical operators with the aim of a drunk potato", alt: "Laser tag" },
+  { src: imgLaser2, caption: "Why are we taking this so seriously? Nobody knows.", alt: "Laser tag 2" },
+  { src: imgLaser3, caption: "Expendables 4: The Budget Version", alt: "Laser tag 3" },
+  { src: imgJumpsuit, caption: "Matching outfits because peer pressure is real", alt: "Jumpsuit gang" },
+  { src: imgPlayArena, caption: "Playing games is the only exercise we get", alt: "Play arena" },
+];
 
 const SarcasticButton = ({ children, className = "", ...props }: any) => {
   return (
@@ -57,6 +77,110 @@ const CharacterCard = ({ name, role, desc, img, stats, objectPosition = "center"
     )}
   </div>
 );
+
+// Photo Slideshow Component
+const PhotoSlideshow = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    
+    // Auto-play
+    const autoplay = setInterval(() => {
+      if (emblaApi) emblaApi.scrollNext();
+    }, 4000);
+    
+    return () => {
+      clearInterval(autoplay);
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex">
+          {slideshowImages.map((image, index) => (
+            <div 
+              key={index} 
+              className="flex-[0_0_100%] min-w-0 relative"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="aspect-[16/9] relative overflow-hidden">
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+                {/* Hover caption overlay */}
+                <div 
+                  className={`absolute inset-0 bg-black/80 flex items-center justify-center p-8 transition-opacity duration-300 ${
+                    hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <p className="text-white text-2xl md:text-4xl font-black text-center uppercase">
+                    {image.caption}
+                  </p>
+                </div>
+                {/* Always visible caption bar */}
+                <div className="absolute bottom-0 left-0 right-0 bg-black/90 p-4">
+                  <p className="text-white font-mono text-center text-sm md:text-lg">
+                    "{image.caption}"
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Navigation buttons */}
+      <button 
+        onClick={scrollPrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white border-4 border-black w-12 h-12 flex items-center justify-center font-black text-2xl brutal-shadow hover:bg-primary hover:text-white transition-colors z-10"
+      >
+        ←
+      </button>
+      <button 
+        onClick={scrollNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white border-4 border-black w-12 h-12 flex items-center justify-center font-black text-2xl brutal-shadow hover:bg-primary hover:text-white transition-colors z-10"
+      >
+        →
+      </button>
+      
+      {/* Dots indicator */}
+      <div className="flex justify-center gap-2 mt-4">
+        {slideshowImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => emblaApi?.scrollTo(index)}
+            className={`w-3 h-3 border-2 border-black transition-colors ${
+              index === selectedIndex ? 'bg-primary' : 'bg-white'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
   const handleUselessClick = () => {
@@ -148,6 +272,17 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Photo Slideshow Section */}
+      <section className="border-b-4 border-black bg-black p-8 md:p-12">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-black text-white text-center mb-8 uppercase">
+            More Evidence of Our <span className="text-primary">Shenanigans</span>
+          </h2>
+          <p className="text-white font-mono text-center mb-8 opacity-75">Hover for the real story behind each photo</p>
+          <PhotoSlideshow />
+        </div>
+      </section>
 
       {/* The Masterminds Section */}
       <section id="masterminds" className="p-12 md:p-24 bg-accent border-b-4 border-black">
@@ -276,40 +411,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Photo Evidence Grid */}
-      <section className="border-b-4 border-black">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          <div className="aspect-square overflow-hidden border-2 border-black relative group">
-            <img src={imgJumpsuit} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-              "Nature Enthusiasts"
-            </div>
-          </div>
-          <div className="aspect-square overflow-hidden border-2 border-black relative group">
-            <img src={imgBowling} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-              "Adults" at Loco Bear
-            </div>
-          </div>
-          <div className="aspect-square overflow-hidden border-2 border-black relative group">
-            <img src={imgLaser} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-              Tactical Operations
-            </div>
-          </div>
-          <div className="aspect-square overflow-hidden border-2 border-black relative group">
-            <img src={imgGroupNight} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-              Good Lore Material
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Secret Sauce */}
       <section className="p-12 bg-white border-b-4 border-black">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-3xl font-black mb-8">THE SECRET SAUCE</h3>
+          <h3 className="text-3xl font-black mb-8 uppercase">THE SECRET SAUCE</h3>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="bg-primary text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Good People</span>
             <span className="bg-secondary border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Bad Jokes</span>
