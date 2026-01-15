@@ -23,6 +23,7 @@ import imgGroupMirror from "@assets/a5e0418e-d725-458e-83a1-df6382d3c24e_1768510
 import imgGroupNight from "@assets/92d3a763-5ca2-47b3-929a-a9dabcc832e5_1768510093841.jpg";
 import imgGroupSunny from "@assets/37207e98-1c28-448a-9bf7-87db4602d3b6_1768510093840.jpg";
 import imgPlayArena from "@assets/IMG_6329_1768510136874.jpg";
+import imgDay2PlayPhoto from "@assets/play_day2_photo.jpg";
 
 import heroBg from "@assets/generated_images/abstract_aggressive_geometry_warning.png";
 
@@ -50,12 +51,12 @@ const DevayanJumpscare = () => {
   useEffect(() => {
     const triggerJumpscare = () => {
       setShowJumpscare(true);
-      
+
       // Play scary sound
       const audio = new Audio("https://www.soundjay.com/misc/sounds/fail-buzzer-01.mp3");
       audio.volume = 0.4;
-      audio.play().catch(() => {});
-      
+      audio.play().catch(() => { });
+
       // Hide after 20-40 seconds (random)
       const displayTime = Math.floor(Math.random() * 20000) + 20000;
       setTimeout(() => setShowJumpscare(false), displayTime);
@@ -86,20 +87,20 @@ const DevayanJumpscare = () => {
           onClick={() => setShowJumpscare(false)}
         >
           <motion.div
-            animate={{ 
+            animate={{
               rotate: [0, -2, 2, -2, 2, 0],
               scale: [1, 1.02, 1, 1.02, 1]
             }}
             transition={{ duration: 0.8, repeat: Infinity }}
             className="relative mb-6 md:mb-0 md:mr-8"
           >
-            <img 
-              src={imgDevayan} 
-              alt="DEVAYAN JUMPSCARE" 
+            <img
+              src={imgDevayan}
+              alt="DEVAYAN JUMPSCARE"
               className="max-w-full max-h-[40vh] md:max-h-[70vh] object-contain border-8 border-destructive shadow-[0_0_100px_rgba(255,0,0,0.8)]"
             />
           </motion.div>
-          
+
           <div className="max-w-lg text-center md:text-left">
             <motion.h2
               animate={{ scale: [1, 1.1, 1] }}
@@ -109,33 +110,33 @@ const DevayanJumpscare = () => {
             >
               DEVAYAN JUMP SCARE
             </motion.h2>
-            
+
             <h3 className="text-white text-2xl md:text-3xl font-black mb-6 uppercase">
               The Enigma We Can't Explain
             </h3>
-            
+
             <div className="space-y-4 text-left">
               <div className="bg-white/10 border-2 border-destructive p-3">
                 <p className="text-primary font-black text-lg uppercase">Indiranagar Enthusiast</p>
                 <p className="text-white/80 font-mono text-sm">Knows every corner of Indiranagar like the back of his hand. Suspicious? Very.</p>
               </div>
-              
+
               <div className="bg-white/10 border-2 border-destructive p-3">
                 <p className="text-secondary font-black text-lg uppercase">The Mystery Man</p>
                 <p className="text-white/80 font-mono text-sm">We tried brainstorming who he is, but he's more of a concept than a person. Philosophy majors are confused.</p>
               </div>
-              
+
               <div className="bg-white/10 border-2 border-destructive p-3">
                 <p className="text-accent font-black text-lg uppercase">Basement Population: 67+</p>
                 <p className="text-white/80 font-mono text-sm">Has 67 children in his basement (that we know of). The number keeps growing. We're scared.</p>
               </div>
-              
+
               <div className="bg-white/10 border-2 border-destructive p-3">
                 <p className="text-destructive font-black text-lg uppercase">Empire Builder</p>
                 <p className="text-white/80 font-mono text-sm">Runs an illegal drug empire bigger than Pablo Escobar's (allegedly). We have no proof. He has no alibis.</p>
               </div>
             </div>
-            
+
             <p className="text-white/30 text-xs mt-6 font-mono">(click anywhere to escape... temporarily)</p>
           </div>
         </motion.div>
@@ -203,12 +204,12 @@ const PhotoSlideshow = () => {
     if (!emblaApi) return;
     onSelect();
     emblaApi.on("select", onSelect);
-    
+
     // Auto-play
     const autoplay = setInterval(() => {
       if (emblaApi) emblaApi.scrollNext();
     }, 4000);
-    
+
     return () => {
       clearInterval(autoplay);
       emblaApi.off("select", onSelect);
@@ -220,23 +221,22 @@ const PhotoSlideshow = () => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slideshowImages.map((image, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="flex-[0_0_100%] min-w-0 relative"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="aspect-[16/9] relative overflow-hidden">
-                <img 
-                  src={image.src} 
+                <img
+                  src={image.src}
                   alt={image.alt}
                   className="w-full h-full object-cover"
                 />
                 {/* Hover caption overlay */}
-                <div 
-                  className={`absolute inset-0 bg-black/80 flex items-center justify-center p-8 transition-opacity duration-300 ${
-                    hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-                  }`}
+                <div
+                  className={`absolute inset-0 bg-black/80 flex items-center justify-center p-8 transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+                    }`}
                 >
                   <p className="text-white text-2xl md:text-4xl font-black text-center uppercase">
                     {image.caption}
@@ -253,32 +253,31 @@ const PhotoSlideshow = () => {
           ))}
         </div>
       </div>
-      
+
       {/* Navigation buttons */}
-      <button 
+      <button
         onClick={scrollPrev}
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white border-4 border-black w-12 h-12 flex items-center justify-center font-black text-2xl brutal-shadow hover:bg-primary hover:text-white transition-colors z-10"
         data-testid="slideshow-prev"
       >
         ←
       </button>
-      <button 
+      <button
         onClick={scrollNext}
         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white border-4 border-black w-12 h-12 flex items-center justify-center font-black text-2xl brutal-shadow hover:bg-primary hover:text-white transition-colors z-10"
         data-testid="slideshow-next"
       >
         →
       </button>
-      
+
       {/* Dots indicator */}
       <div className="flex justify-center gap-2 mt-4">
         {slideshowImages.map((_, index) => (
           <button
             key={index}
             onClick={() => emblaApi?.scrollTo(index)}
-            className={`w-3 h-3 border-2 border-black transition-colors ${
-              index === selectedIndex ? 'bg-primary' : 'bg-white'
-            }`}
+            className={`w-3 h-3 border-2 border-black transition-colors ${index === selectedIndex ? 'bg-primary' : 'bg-white'
+              }`}
             data-testid={`slideshow-dot-${index}`}
           />
         ))}
@@ -309,10 +308,10 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden font-sans">
       {/* Devayan Jumpscare - Always active */}
       <DevayanJumpscare />
-      
+
       {/* Navigation */}
       <nav className="border-b-4 border-black sticky top-0 bg-white z-50 flex justify-between items-center p-4">
-        <div 
+        <div
           className="text-xl md:text-2xl font-black bg-black text-white px-2 py-1 truncate max-w-[200px] md:max-w-none cursor-pointer hover:bg-primary transition-colors"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           data-testid="nav-logo"
@@ -324,7 +323,7 @@ export default function Home() {
           <button onClick={() => scrollToSection('evidence')} className="hover:underline decoration-4 decoration-secondary" data-testid="nav-evidence">EVIDENCE</button>
           <button onClick={() => scrollToSection('itinerary')} className="hover:underline decoration-4 decoration-accent" data-testid="nav-chaos">THE CHAOS</button>
         </div>
-        <button 
+        <button
           className="bg-secondary border-2 border-black px-4 py-2 font-bold uppercase hover:bg-black hover:text-white transition-colors text-sm md:text-base"
           onClick={() => scrollToSection('itinerary')}
           data-testid="nav-date"
@@ -335,13 +334,13 @@ export default function Home() {
 
       {/* Hero Section */}
       <header className="relative border-b-4 border-black min-h-[90vh] flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20 z-0" 
+        <div
+          className="absolute inset-0 opacity-20 z-0"
           style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover' }}
         />
-        
+
         <div className="relative z-10 max-w-5xl">
-          <motion.div 
+          <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -349,18 +348,18 @@ export default function Home() {
           >
             <span className="font-mono text-lg md:text-xl font-bold uppercase">⚠️ URGENT: This Could've Been a WhatsApp Message But We're Extra ⚠️</span>
           </motion.div>
-          
-          <motion.h1 
+
+          <motion.h1
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="text-5xl md:text-8xl font-black leading-[0.9] mb-8 tracking-tighter"
           >
-            THE MOST <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent stroke-black" style={{ WebkitTextStroke: '2px black' }}>UNNECESSARY</span> <br/>
+            THE MOST <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent stroke-black" style={{ WebkitTextStroke: '2px black' }}>UNNECESSARY</span> <br />
             BANGALORE TRIP
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -368,8 +367,8 @@ export default function Home() {
           >
             You're about to waste precious minutes of your life reading this. Worth it? Probably not.
           </motion.p>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -379,23 +378,23 @@ export default function Home() {
           </motion.p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
-             <SarcasticButton onClick={handleAcceptFate} data-testid="accept-fate-btn">
+            <SarcasticButton onClick={handleAcceptFate} data-testid="accept-fate-btn">
               Accept Your Fate (No Refunds)
             </SarcasticButton>
             <span className="font-mono text-sm bg-black text-white p-2">Jan 23-27, 2026 | Because regular invites are for boring people</span>
           </div>
-          
+
           <div className="bg-white border-4 border-black p-4 max-w-md mx-auto brutal-shadow">
             <p className="font-black text-lg mb-2">Why does this website exist?</p>
             <div className="grid grid-cols-3 gap-2 text-xs font-mono">
               <div className="bg-gray-100 p-2 border border-black">
-                <strong>Option A:</strong><br/>We have too much free time and no hobbies
+                <strong>Option A:</strong><br />We have too much free time and no hobbies
               </div>
               <div className="bg-gray-100 p-2 border border-black">
-                <strong>Option B:</strong><br/>We wanted to annoy you specifically
+                <strong>Option B:</strong><br />We wanted to annoy you specifically
               </div>
               <div className="bg-primary text-white p-2 border border-black">
-                <strong>Option C:</strong><br/>All of the above ✓
+                <strong>Option C:</strong><br />All of the above ✓
               </div>
             </div>
           </div>
@@ -422,28 +421,28 @@ export default function Home() {
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
-            <CharacterCard 
+            <CharacterCard
               name="Shreyansh"
               role="The Logistics Overlord"
               img={imgShreyansh}
               desc="Half of 'The Bakchod Duo'. The only person who actually knows what's happening. Will sell his kidney for content. Has a spreadsheet addiction that requires intervention."
               stats={["Spreadsheets for his spreadsheets for his spreadsheets", "Will send you 47 reminders (minimum)", "Has planned your bathroom breaks (yes, really)"]}
             />
-            <CharacterCard 
+            <CharacterCard
               name="Sarthak"
               role="Chief Chaos Officer"
               img={imgSarthak}
               desc="His answer to literally everything? 'Chalo daru pite hai'. Plans are merely suggestions he ignores. 'Trust me bro' - famous last words before disaster."
               stats={["'What if we just climb that?' - moments before tragedy", "'Why would we need a reservation?' - said confidently, wrongly", "Finds spots even Google is scared of"]}
             />
-            <CharacterCard 
+            <CharacterCard
               name="Hari"
               role="The Human GPS (Allegedly)"
               img={imgHari}
               desc="One half of 'The Bakchod Duo'. Claims to never need GPS because he IS the GPS. Spoiler: He's gotten us lost 47 times. But the street food finds? *Chef's kiss*"
               stats={["Pro Yulu Rider (citation needed)", "Knows shortcuts that add 2 hours", "Food Oracle but make it chaotic"]}
             />
-             <CharacterCard 
+            <CharacterCard
               name="Akshith"
               role="Corporate Disappointment"
               img={imgAkshith}
@@ -462,7 +461,7 @@ export default function Home() {
           <p className="font-mono text-2xl mb-12 bg-white text-black inline-block px-4 py-2 border-2 border-white rotate-1">
             (This is a threat wrapped in an invitation. You've been warned.)
           </p>
-          
+
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="border-4 border-white p-6 hover:bg-primary transition-colors cursor-pointer" onClick={() => scrollToSection('evidence')}>
               <h3 className="font-black text-4xl mb-2">98%</h3>
@@ -480,10 +479,10 @@ export default function Home() {
               <p className="text-xs mt-2 opacity-75">Good stories guaranteed. Therapy bills not included.</p>
             </div>
           </div>
-          
-          <a 
-            href="https://en.wikipedia.org/wiki/Assassination_of_Mahatma_Gandhi" 
-            target="_blank" 
+
+          <a
+            href="https://en.wikipedia.org/wiki/Assassination_of_Mahatma_Gandhi"
+            target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-black border-4 border-white p-6 brutal-shadow inline-block cursor-pointer hover:bg-primary hover:text-white transition-colors"
             data-testid="track-record-link"
@@ -499,7 +498,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <SectionHeading>Exhibit A: The Crime Scene Photos</SectionHeading>
           <p className="font-mono text-lg mb-8">Data collected from previous Bangalore disasters. Sample size: Every single time we've traumatized this city.</p>
-          
+
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-black text-white px-2 py-1">March 2023</span>
@@ -532,7 +531,7 @@ export default function Home() {
               <p className="font-mono text-sm">We achieved peak communication without uttering a single word. Telepathy? Collective brain damage? Yes.</p>
             </div>
           </div>
-          
+
           <div className="bg-black text-white p-6 border-4 border-black text-center">
             <p className="font-mono text-lg">Also: We're shitfaced drunk every single time, spend way too much on arcades like functioning adults, and Shreyansh & Hari's cricket skills get progressively worse with each drink (which is saying something).</p>
           </div>
@@ -563,106 +562,106 @@ export default function Home() {
 
         {/* Day 1 */}
         <div className="grid md:grid-cols-2">
-           <div className="p-12 border-b-4 md:border-b-0 md:border-r-4 border-black bg-white">
-             <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 1 • JAN 24 • SATURDAY</span>
-             <h3 className="text-4xl font-black uppercase mb-2">When We Pretend to be Nature Enthusiasts</h3>
-             <p className="font-mono text-sm mb-6 opacity-75">Because nothing says friendship like watching animals judge our life choices</p>
-             <ul className="space-y-4 font-mono">
-               <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl bg-secondary px-2">AM</span>
-                 <div>
-                   <strong className="block text-lg">Bannerghatta National Park</strong>
-                   <span className="text-sm opacity-75">Safari Adventure • Zoo Exploration • Butterfly Park (for the Instagram aesthetic we desperately need)</span>
-                 </div>
-               </li>
-               <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl bg-primary text-white px-2">PM</span>
-                 <div>
-                   <strong className="block text-lg">Dinner & Night Cap (More Like Night Bottle)</strong>
-                   <span className="text-sm opacity-75">Location TBD (Hari's picking, pray for us). Dress code: Exhausted from safari, dead inside. Ends at Sarthak's PG for drinks, dancing, and karaoke that will definitely get us evicted.</span>
-                 </div>
-               </li>
-             </ul>
-           </div>
-           <div className="h-64 md:h-auto border-b-4 md:border-b-0 border-black overflow-hidden relative">
-              <img src={imgJumpsuit} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-              <div className="absolute bottom-4 right-4 bg-secondary border-2 border-black p-2 font-bold text-xs uppercase">
-                Figure 1: "Sophistication" (Delusional)
-              </div>
-           </div>
+          <div className="p-12 border-b-4 md:border-b-0 md:border-r-4 border-black bg-white">
+            <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 1 • JAN 24 • SATURDAY</span>
+            <h3 className="text-4xl font-black uppercase mb-2">When We Pretend to be Nature Enthusiasts</h3>
+            <p className="font-mono text-sm mb-6 opacity-75">Because nothing says friendship like watching animals judge our life choices</p>
+            <ul className="space-y-4 font-mono">
+              <li className="flex gap-4 items-start">
+                <span className="font-black text-xl bg-secondary px-2">AM</span>
+                <div>
+                  <strong className="block text-lg">Bannerghatta National Park</strong>
+                  <span className="text-sm opacity-75">Safari Adventure • Zoo Exploration • Butterfly Park (for the Instagram aesthetic we desperately need)</span>
+                </div>
+              </li>
+              <li className="flex gap-4 items-start">
+                <span className="font-black text-xl bg-primary text-white px-2">PM</span>
+                <div>
+                  <strong className="block text-lg">Dinner & Night Cap (More Like Night Bottle)</strong>
+                  <span className="text-sm opacity-75">Location TBD (Hari's picking, pray for us). Dress code: Exhausted from safari, dead inside. Ends at Sarthak's PG for drinks, dancing, and karaoke that will definitely get us evicted.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="h-64 md:h-auto border-b-4 md:border-b-0 border-black overflow-hidden relative">
+            <img src={imgJumpsuit} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+            <div className="absolute bottom-4 right-4 bg-secondary border-2 border-black p-2 font-bold text-xs uppercase">
+              Figure 1: "Sophistication" (Delusional)
+            </div>
+          </div>
         </div>
 
         {/* Day 2 */}
         <div className="grid md:grid-cols-2">
-           <div className="h-64 md:h-auto border-b-4 md:border-b-0 md:border-r-4 border-black overflow-hidden relative order-2 md:order-1">
-              <img src={imgGokart} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-              <div className="absolute top-4 left-4 bg-primary text-white border-2 border-black p-2 font-bold text-xs uppercase">
-                Figure 2: "Maturity" (Non-existent)
-              </div>
-           </div>
-           <div className="p-12 border-b-4 md:border-b-0 border-black bg-accent order-1 md:order-2">
-             <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 2 • JAN 25 • SUNDAY</span>
-             <h3 className="text-4xl font-black uppercase mb-2">The Day We Abandon Adulthood Entirely</h3>
-             <p className="font-mono text-sm mb-6">Yes, we're adults. No, we don't act like it. Problem?</p>
-             <ul className="space-y-4 font-mono">
-               <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl bg-white px-2">AM</span>
-                 <div>
-                   <strong className="block text-lg">Recovery Mode (Survival Mode)</strong>
-                   <span className="text-sm opacity-75">Saturday night was a war zone. Sleep in, hydrate aggressively, question your life choices. No judgment, no rush, no dignity left.</span>
-                 </div>
-               </li>
-               <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl bg-black text-white px-2">PM</span>
-                 <div>
-                   <strong className="block text-lg">Play Arena (Adults Playing Kids' Games)</strong>
-                   <span className="text-sm opacity-75">Trampolines (defying gravity and our age), Arcade Games (getting embarrassingly competitive over meaningless prizes), VR, Laser Tag, Cricket (because ego issues).</span>
-                 </div>
-               </li>
-               <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl bg-primary text-white px-2">EVE</span>
-                 <div>
-                   <strong className="block text-lg">Loco Bear (Bad Decisions Central)</strong>
-                   <span className="text-sm opacity-75">Craft beers (IPAs for pretentious people, Stouts for masochists), wings that slap, burgers that hit different. Then Church Street or wherever Sarthak's Random Idea™ takes us.</span>
-                 </div>
-               </li>
-             </ul>
-           </div>
+          <div className="h-64 md:h-auto border-b-4 md:border-b-0 md:border-r-4 border-black overflow-hidden relative order-2 md:order-1">
+            <img src={imgDay2PlayPhoto} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+            <div className="absolute top-4 left-4 bg-primary text-white border-2 border-black p-2 font-bold text-xs uppercase">
+              Figure 2: "Maturity" (Non-existent)
+            </div>
+          </div>
+          <div className="p-12 border-b-4 md:border-b-0 border-black bg-accent order-1 md:order-2">
+            <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 2 • JAN 25 • SUNDAY</span>
+            <h3 className="text-4xl font-black uppercase mb-2">The Day We Abandon Adulthood Entirely</h3>
+            <p className="font-mono text-sm mb-6">Yes, we're adults. No, we don't act like it. Problem?</p>
+            <ul className="space-y-4 font-mono">
+              <li className="flex gap-4 items-start">
+                <span className="font-black text-xl bg-white px-2">AM</span>
+                <div>
+                  <strong className="block text-lg">Recovery Mode (Survival Mode)</strong>
+                  <span className="text-sm opacity-75">Saturday night was a war zone. Sleep in, hydrate aggressively, question your life choices. No judgment, no rush, no dignity left.</span>
+                </div>
+              </li>
+              <li className="flex gap-4 items-start">
+                <span className="font-black text-xl bg-black text-white px-2">PM</span>
+                <div>
+                  <strong className="block text-lg">Play Arena (Adults Playing Kids' Games)</strong>
+                  <span className="text-sm opacity-75">Trampolines (defying gravity and our age), Arcade Games (getting embarrassingly competitive over meaningless prizes), VR, Laser Tag, Cricket (because ego issues).</span>
+                </div>
+              </li>
+              <li className="flex gap-4 items-start">
+                <span className="font-black text-xl bg-primary text-white px-2">EVE</span>
+                <div>
+                  <strong className="block text-lg">Loco Bear (Bad Decisions Central)</strong>
+                  <span className="text-sm opacity-75">Craft beers (IPAs for pretentious people, Stouts for masochists), wings that slap, burgers that hit different. Then Church Street or wherever Sarthak's Random Idea™ takes us.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Day 3 */}
         <div className="p-12 bg-white border-b-4 border-black">
-            <div className="max-w-4xl mx-auto">
-              <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 3 • JAN 26 • MONDAY (REPUBLIC DAY - IRONIC)</span>
-              <h3 className="text-4xl md:text-6xl font-black uppercase mb-4">The Mysterious Day (We Have No Plan)</h3>
-              <p className="font-mono text-xl mb-8">
-                This day is intentionally left flexible because:<br/>
-                A) We might be physically deceased | B) Someone will have a terrible idea we'll follow anyway | C) Democracy decides (scary) | D) All of the above (likely)
-              </p>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="border-4 border-black p-4 hover:bg-secondary transition-colors cursor-pointer">
-                  <h4 className="font-black text-lg">Option 1: Cubbon Park</h4>
-                  <p className="font-mono text-sm">Morning walks, Government Museum, pretend we're sophisticated adults who read books and have opinions.</p>
-                </div>
-                <div className="border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer">
-                  <h4 className="font-black text-lg">Option 2: Lumbini Gardens</h4>
-                  <p className="font-mono text-sm">Lake vibes, boating, actually relaxing for once. Perfect for recovering from weekend carnage.</p>
-                </div>
-                <div className="border-4 border-black p-4 hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                  <h4 className="font-black text-lg">Option 3: The Food Crawl</h4>
-                  <p className="font-mono text-sm">MTR for breakfast, Vidyarthi Bhavan for the life-changing dosa, Indian Coffee House for pretentious vibes, Hari's secret dinner weapon.</p>
-                </div>
-                <div className="border-4 border-black p-4 bg-gray-100 cursor-pointer">
-                  <h4 className="font-black text-lg">Option 4: Nandi Hills Sunrise</h4>
-                  <p className="font-mono text-sm">⚠️ Requires 4 AM wake up. Views are incredible. Reality: Sarthak will suggest this at midnight after 6 drinks.</p>
-                </div>
-                <div className="border-4 border-black p-4 bg-destructive text-white col-span-full md:col-span-2 cursor-pointer hover:scale-105 transition-transform">
-                  <h4 className="font-black text-xl">Option 5: Drink All Day (THE ONLY CORRECT OPTION)</h4>
-                  <p className="font-mono text-sm">Because sometimes, the best plan is no plan—just a continuous flow of liquid encouragement and poor decisions. Liver damage is temporary, memories are forever (or forgotten).</p>
-                </div>
+          <div className="max-w-4xl mx-auto">
+            <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 3 • JAN 26 • MONDAY (REPUBLIC DAY - IRONIC)</span>
+            <h3 className="text-4xl md:text-6xl font-black uppercase mb-4">The Mysterious Day (We Have No Plan)</h3>
+            <p className="font-mono text-xl mb-8">
+              This day is intentionally left flexible because:<br />
+              A) We might be physically deceased | B) Someone will have a terrible idea we'll follow anyway | C) Democracy decides (scary) | D) All of the above (likely)
+            </p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="border-4 border-black p-4 hover:bg-secondary transition-colors cursor-pointer">
+                <h4 className="font-black text-lg">Option 1: Cubbon Park</h4>
+                <p className="font-mono text-sm">Morning walks, Government Museum, pretend we're sophisticated adults who read books and have opinions.</p>
+              </div>
+              <div className="border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer">
+                <h4 className="font-black text-lg">Option 2: Lumbini Gardens</h4>
+                <p className="font-mono text-sm">Lake vibes, boating, actually relaxing for once. Perfect for recovering from weekend carnage.</p>
+              </div>
+              <div className="border-4 border-black p-4 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+                <h4 className="font-black text-lg">Option 3: The Food Crawl</h4>
+                <p className="font-mono text-sm">MTR for breakfast, Vidyarthi Bhavan for the life-changing dosa, Indian Coffee House for pretentious vibes, Hari's secret dinner weapon.</p>
+              </div>
+              <div className="border-4 border-black p-4 bg-gray-100 cursor-pointer">
+                <h4 className="font-black text-lg">Option 4: Nandi Hills Sunrise</h4>
+                <p className="font-mono text-sm">⚠️ Requires 4 AM wake up. Views are incredible. Reality: Sarthak will suggest this at midnight after 6 drinks.</p>
+              </div>
+              <div className="border-4 border-black p-4 bg-destructive text-white col-span-full md:col-span-2 cursor-pointer hover:scale-105 transition-transform">
+                <h4 className="font-black text-xl">Option 5: Drink All Day (THE ONLY CORRECT OPTION)</h4>
+                <p className="font-mono text-sm">Because sometimes, the best plan is no plan—just a continuous flow of liquid encouragement and poor decisions. Liver damage is temporary, memories are forever (or forgotten).</p>
               </div>
             </div>
+          </div>
         </div>
       </section>
 
@@ -711,9 +710,9 @@ export default function Home() {
         <h2 className="text-4xl font-black mb-6 text-primary">SEE YOU IN BANGALORE (OR ELSE)</h2>
         <p className="text-xl mb-4">"When's the next trip?" - Everyone, immediately regretting asking</p>
         <p className="opacity-50 text-sm mb-8">
-          © 2026 The Bakchod Duo & Co. All Rights Reserved. Some Rights Questionable.<br/>
-          Warning: We are not liable for any liver damage, lost dignity, empty wallets, or legendary lore created.<br/>
-          Side effects may include: Excessive laughter, poor decisions, and an inexplicable urge to return.<br/>
+          © 2026 The Bakchod Duo & Co. All Rights Reserved. Some Rights Questionable.<br />
+          Warning: We are not liable for any liver damage, lost dignity, empty wallets, or legendary lore created.<br />
+          Side effects may include: Excessive laughter, poor decisions, and an inexplicable urge to return.<br />
           From laser tag to late-night disasters, we know how to have a "good" time.
         </p>
         <div className="flex justify-center gap-4">
