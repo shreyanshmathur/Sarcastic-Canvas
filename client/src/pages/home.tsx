@@ -270,17 +270,20 @@ const PhotoSlideshow = () => {
         →
       </button>
 
-      {/* Dots indicator */}
-      <div className="flex justify-center gap-2 mt-4">
+      {/* Dots indicator - abbreviated on mobile */}
+      <div className="flex justify-center items-center gap-2 mt-4">
         {slideshowImages.map((_, index) => (
           <button
             key={index}
             onClick={() => emblaApi?.scrollTo(index)}
-            className={`w-3 h-3 border-2 border-black transition-colors ${index === selectedIndex ? 'bg-primary' : 'bg-white'
+            className={`w-3 h-3 border-2 border-black transition-colors ${index > 4 ? 'hidden md:block' : ''} ${index === selectedIndex ? 'bg-primary' : 'bg-white'
               }`}
             data-testid={`slideshow-dot-${index}`}
           />
         ))}
+        <span className="md:hidden text-xs font-mono bg-white border-2 border-black px-2 py-1">
+          {selectedIndex + 1}/{slideshowImages.length}
+        </span>
       </div>
     </div>
   );
@@ -312,7 +315,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="border-b-4 border-black sticky top-0 bg-white z-50 flex justify-between items-center p-4">
         <div
-          className="text-xl md:text-2xl font-black bg-black text-white px-2 py-1 truncate max-w-[200px] md:max-w-none cursor-pointer hover:bg-primary transition-colors"
+          className="text-base md:text-2xl font-black bg-black text-white px-2 py-1 cursor-pointer hover:bg-primary transition-colors whitespace-nowrap"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           data-testid="nav-logo"
         >
