@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 
 // Importing the actual assets provided
@@ -11,7 +11,7 @@ import imgShreyansh from "@assets/IMG_7691_1768509225161.jpg";
 import imgHari from "@assets/c84a8361-a995-43db-92d7-10b84a982d25_1768509245380.jpg";
 import imgSarthak from "@assets/Screenshot_20220523-125146_1768509327916.jpg";
 import imgAkshith from "@assets/image_1768509418497.png";
-import imgDevayan from "@assets/image_1768509448883.png";
+import imgDevayan from "@assets/image_1768510221094.png";
 import imgLaser from "@assets/975709d9-04c6-45b1-a32a-995676c8c6ba_1768510093841.jpg";
 import imgLaser2 from "@assets/IMG_6315_1768510136872.jpg";
 import imgLaser3 from "@assets/IMG_6317_1768510136873.jpg";
@@ -42,6 +42,91 @@ const slideshowImages = [
   { src: imgJumpsuit, caption: "Matching outfits because peer pressure is real", alt: "Jumpsuit gang" },
   { src: imgPlayArena, caption: "Playing games is the only exercise we get", alt: "Play arena" },
 ];
+
+// Devayan jumpscare messages
+const jumpscareMessages = [
+  "SURPRISE! You thought you escaped Devayan? WRONG.",
+  "BOO! Devayan is always watching. Always.",
+  "DID YOU MISS ME? Too bad. I'm here anyway.",
+  "PLOT TWIST: Devayan was behind you the whole time.",
+  "YOU CAN'T SCROLL WITHOUT DEVAYAN'S APPROVAL.",
+  "JUMPSCARE! Consider this your daily dose of chaos.",
+  "DEVAYAN HAS ENTERED THE CHAT. RUN.",
+  "THOUGHT THIS WAS A SAFE SPACE? THINK AGAIN.",
+];
+
+// Devayan Jumpscare Component
+const DevayanJumpscare = () => {
+  const [showJumpscare, setShowJumpscare] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("");
+
+  useEffect(() => {
+    const triggerJumpscare = () => {
+      const randomMessage = jumpscareMessages[Math.floor(Math.random() * jumpscareMessages.length)];
+      setCurrentMessage(randomMessage);
+      setShowJumpscare(true);
+      
+      // Play scary sound
+      const audio = new Audio("https://www.soundjay.com/misc/sounds/fail-buzzer-01.mp3");
+      audio.volume = 0.3;
+      audio.play().catch(() => {}); // Ignore autoplay restrictions
+      
+      // Hide after 2.5 seconds
+      setTimeout(() => setShowJumpscare(false), 2500);
+    };
+
+    // Random interval between 25-60 seconds
+    const scheduleNextJumpscare = () => {
+      const randomDelay = Math.floor(Math.random() * 35000) + 25000;
+      return setTimeout(() => {
+        triggerJumpscare();
+        scheduleNextJumpscare();
+      }, randomDelay);
+    };
+
+    const timeoutId = scheduleNextJumpscare();
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {showJumpscare && (
+        <motion.div
+          initial={{ opacity: 0, scale: 3 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.15 }}
+          className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center cursor-pointer"
+          onClick={() => setShowJumpscare(false)}
+        >
+          <motion.div
+            animate={{ 
+              rotate: [0, -5, 5, -5, 5, 0],
+              scale: [1, 1.1, 1, 1.1, 1]
+            }}
+            transition={{ duration: 0.5, repeat: Infinity }}
+            className="relative"
+          >
+            <img 
+              src={imgDevayan} 
+              alt="DEVAYAN JUMPSCARE" 
+              className="max-w-full max-h-[60vh] object-contain border-8 border-destructive shadow-[0_0_100px_rgba(255,0,0,0.8)]"
+            />
+          </motion.div>
+          <motion.p
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 0.3, repeat: Infinity }}
+            className="text-destructive text-3xl md:text-5xl font-black text-center mt-8 px-4 uppercase"
+            style={{ textShadow: '0 0 20px red, 0 0 40px red' }}
+          >
+            {currentMessage}
+          </motion.p>
+          <p className="text-white/50 text-sm mt-4 font-mono">(click anywhere to dismiss... if you dare)</p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
 const SarcasticButton = ({ children, className = "", ...props }: any) => {
   return (
@@ -189,6 +274,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden font-sans">
+      {/* Devayan Jumpscare - Always active */}
+      <DevayanJumpscare />
+      
       {/* Navigation */}
       <nav className="border-b-4 border-black sticky top-0 bg-white z-50 flex justify-between items-center p-4">
         <div className="text-xl md:text-2xl font-black bg-black text-white px-2 py-1 truncate max-w-[200px] md:max-w-none">
@@ -289,10 +377,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <SectionHeading className="bg-white px-4 transform -rotate-1">The Masterminds Behind This Chaos</SectionHeading>
           <p className="text-xl font-bold mb-12 max-w-2xl bg-white border-2 border-black p-4">
-            Introducing: The trio nobody asked for but everyone's stuck with.
+            Introducing: The quartet nobody asked for but everyone's stuck with.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
             <CharacterCard 
               name="Shreyansh"
               role="The Logistics Guy"
@@ -321,13 +409,6 @@ export default function Home() {
               objectPosition="top"
               desc="The shortest in the group and not the highest in the room. Works at the 'most prestigious firm' (his words, not ours)."
               stats={["Alcohol Tolerance: -5", "First to pass out, guaranteed", "'Krishna ji sab dekh rahe hain'"]}
-            />
-             <CharacterCard 
-              name="Devayan"
-              role="The Wildcard"
-              img={imgDevayan}
-              desc="Added to the group chat by mistake, stayed for the chaos. Probably knows more than he lets on about everything."
-              stats={["Stealth Mode: Always On", "Chaos Contributor: Active", "Vibe Check: Suspiciously Passed"]}
             />
           </div>
         </div>
