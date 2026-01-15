@@ -42,10 +42,10 @@ const SectionHeading = ({ children, className = "" }: any) => (
   </h2>
 );
 
-const CharacterCard = ({ name, role, desc, img, stats }: any) => (
+const CharacterCard = ({ name, role, desc, img, stats, objectPosition = "center" }: any) => (
   <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
     <div className="aspect-square border-4 border-black mb-4 overflow-hidden grayscale contrast-125 hover:grayscale-0 transition-all">
-      <img src={img} alt={name} className="w-full h-full object-cover" />
+      <img src={img} alt={name} className="w-full h-full object-cover" style={{ objectPosition }} />
     </div>
     <h3 className="text-2xl font-black bg-black text-white inline-block px-2 mb-2 uppercase">{name}</h3>
     <p className="font-mono font-bold text-primary mb-2 uppercase">{role}</p>
@@ -60,7 +60,7 @@ const CharacterCard = ({ name, role, desc, img, stats }: any) => (
 
 export default function Home() {
   const handleUselessClick = () => {
-    alert("RSVP Confirmed: You have no choice anyway.");
+    alert("Congratulations! You clicked a button. Your life remains unchanged. See you in Bangalore anyway.");
   };
 
   return (
@@ -92,9 +92,9 @@ export default function Home() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="bg-secondary border-4 border-black p-2 mb-6 inline-block transform rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            className="bg-destructive text-white border-4 border-black p-2 mb-6 inline-block transform rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
           >
-            <span className="font-mono text-lg md:text-xl font-bold uppercase">Urgent: This could've been a text</span>
+            <span className="font-mono text-lg md:text-xl font-bold uppercase">⚠️ URGENT: This Could've Been a Text ⚠️</span>
           </motion.div>
           
           <motion.h1 
@@ -111,16 +111,40 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl font-mono font-bold mb-10 bg-white inline-block px-4 py-2 border-2 border-black rotate-1"
+            className="text-xl md:text-2xl font-mono font-bold mb-4 bg-white inline-block px-4 py-2 border-2 border-black rotate-1"
           >
-            60 Slides. 4 Days. Zero Dignity.
+            But here we are with 60 slides instead.
+          </motion.p>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-lg font-mono mb-10 bg-secondary inline-block px-3 py-1 border-2 border-black -rotate-1"
+          >
+            Buckle up, this is happening.
           </motion.p>
 
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
              <SarcasticButton onClick={handleUselessClick}>
-              Accept Fate
+              Accept Your Fate
             </SarcasticButton>
-            <span className="font-mono text-sm bg-black text-white p-1">Jan 23-27, 2026</span>
+            <span className="font-mono text-sm bg-black text-white p-2">Jan 23-27, 2026 | Because regular invites are too mainstream</span>
+          </div>
+          
+          <div className="bg-white border-4 border-black p-4 max-w-md mx-auto brutal-shadow">
+            <p className="font-black text-lg mb-2">Why does this presentation exist?</p>
+            <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+              <div className="bg-gray-100 p-2 border border-black">
+                <strong>Option A:</strong><br/>Too much free time
+              </div>
+              <div className="bg-gray-100 p-2 border border-black">
+                <strong>Option B:</strong><br/>We wanted to annoy you
+              </div>
+              <div className="bg-primary text-white p-2 border border-black">
+                <strong>Option C:</strong><br/>All of the above ✓
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -128,7 +152,7 @@ export default function Home() {
       {/* The Masterminds Section */}
       <section id="masterminds" className="p-12 md:p-24 bg-accent border-b-4 border-black">
         <div className="max-w-7xl mx-auto">
-          <SectionHeading className="bg-white px-4 transform -rotate-1">The Masterminds</SectionHeading>
+          <SectionHeading className="bg-white px-4 transform -rotate-1">The Masterminds Behind This Chaos</SectionHeading>
           <p className="text-xl font-bold mb-12 max-w-2xl bg-white border-2 border-black p-4">
             Introducing: The trio nobody asked for but everyone's stuck with.
           </p>
@@ -138,71 +162,160 @@ export default function Home() {
               name="Shreyansh"
               role="The Logistics Guy"
               img={imgShreyansh}
-              desc="Half of 'The Bakchod Duo'. Spreadsheets for his spreadsheets. Has already planned bathroom breaks for the entire trip."
-              stats={["Navigation Wizard", "Budget Master (splits bill in 2 mins)", "Calendar Color-Coder"]}
+              desc="Half of 'The Bakchod Duo'. The person who actually knows what's happening, unlike the others. Will do anything for content."
+              stats={["Spreadsheets for his spreadsheets", "47 reminder messages incoming", "Has planned your bathroom breaks"]}
             />
             <CharacterCard 
               name="Sarthak"
               role="Designated Bartender"
               img={imgSarthak}
-              desc="Answer to everything: 'Chalo daru pite hai'. Spontaneity Level: 1000. Plans are merely suggestions."
-              stats={["Climbs Random Things", "Finds Spots Google Doesn't Know", "Motto: 'Trust me bro'"]}
+              desc="His answer to every question? 'Chalo daru pite hai'. Plans are merely suggestions. 'Trust me bro' is his life motto."
+              stats={["'What if we just climb that?'", "'Why would we need a reservation?'", "Finds spots Google doesn't know"]}
             />
             <CharacterCard 
               name="Hari"
               role="Adventure Architect"
               img={imgHari}
-              desc="The Local Legend. Street Food Connoisseur. Knows which tourist traps to expertly avoid."
-              stats={["Food Oracle", "Never Uses GPS", "Pro Yulu Rider (Questionable skills)"]}
+              desc="One half of 'The Bakchod Duo'. Your personal guide to the city's legendary street food scene. Never uses GPS because he IS the GPS."
+              stats={["Pro Yulu Rider (questionable)", "Knows every shortcut", "Food Oracle extraordinaire"]}
             />
              <CharacterCard 
               name="Akshith"
-              role="Corporate Professional"
+              role="Corporate Professional (Sort Of)"
               img={imgAkshith}
-              desc="Works at the 'most prestigious firm'. Vertically challenged. First to pass out, guaranteed."
-              stats={["Alcohol Tolerance: -5", "The Krishna Excuse", "Sort Of Professional"]}
+              objectPosition="top"
+              desc="The shortest in the group and not the highest in the room. Works at the 'most prestigious firm' (his words, not ours)."
+              stats={["Alcohol Tolerance: -5", "First to pass out, guaranteed", "'Krishna ji sab dekh rahe hain'"]}
             />
              <CharacterCard 
               name="Devayan"
               role="The Wildcard"
               img={imgDevayan}
-              desc="Added to the group chat by mistake, stayed for the drama. Probably knows more than he lets on."
-              stats={["Stealth Mode: 100", "Backpack Contents: Mystery", "Vibe Check: Passed"]}
+              desc="Added to the group chat by mistake, stayed for the chaos. Probably knows more than he lets on about everything."
+              stats={["Stealth Mode: Always On", "Chaos Contributor: Active", "Vibe Check: Suspiciously Passed"]}
             />
           </div>
         </div>
       </section>
 
-      {/* Why Section - With Evidence */}
-      <section id="evidence" className="grid md:grid-cols-2 border-b-4 border-black">
-        <div className="p-12 md:p-24 bg-white flex flex-col justify-center border-r-4 border-black">
-           <SectionHeading>SCIENTIFIC EVIDENCE</SectionHeading>
-           <div className="space-y-6">
-             <div className="bg-gray-100 p-6 border-4 border-black">
-               <h3 className="font-black text-3xl mb-2">98%</h3>
-               <p className="font-mono uppercase">Probability of Chaos</p>
-             </div>
-             <div className="bg-primary p-6 border-4 border-black text-white transform translate-x-4">
-               <h3 className="font-black text-3xl mb-2">100%</h3>
-               <p className="font-mono uppercase">Unforgettable Moments</p>
-             </div>
-             <div className="bg-secondary p-6 border-4 border-black transform -translate-x-2">
-               <h3 className="font-black text-3xl mb-2">Zero</h3>
-               <p className="font-mono uppercase">Boring Moments Since 1947</p>
-             </div>
-           </div>
-        </div>
-        <div className="relative overflow-hidden group min-h-[500px]">
-          <div className="absolute inset-0 grid grid-cols-2 gap-2 p-2 bg-black">
-            <img src={imgJumpsuit} className="w-full h-full object-cover border-2 border-white hover:scale-110 transition-transform duration-500" />
-            <img src={imgGroupNight} className="w-full h-full object-cover border-2 border-white hover:scale-110 transition-transform duration-500" />
-            <img src={imgGroupMirror} className="w-full h-full object-cover border-2 border-white hover:scale-110 transition-transform duration-500" />
-            <img src={imgGroupSunny} className="w-full h-full object-cover border-2 border-white hover:scale-110 transition-transform duration-500" />
+      {/* Why You Should Come - Threats Section */}
+      <section className="p-12 md:p-24 bg-black text-white border-b-4 border-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 text-primary">Why You Should Actually Come</h2>
+          <p className="font-mono text-2xl mb-12 bg-white text-black inline-block px-4 py-2 border-2 border-white rotate-1">
+            (Yeh Dhamki hai! Also we made 60 slides)
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="border-4 border-white p-6 hover:bg-primary transition-colors">
+              <h3 className="font-black text-4xl mb-2">98%</h3>
+              <p className="font-mono uppercase">Probability of Chaos</p>
+              <p className="text-xs mt-2 opacity-75">In the best way possible</p>
+            </div>
+            <div className="border-4 border-white p-6 hover:bg-secondary hover:text-black transition-colors">
+              <h3 className="font-black text-4xl mb-2">87%</h3>
+              <p className="font-mono uppercase">Laughter Quotient</p>
+              <p className="text-xs mt-2 opacity-75">Your abs will hurt</p>
+            </div>
+            <div className="border-4 border-white p-6 hover:bg-accent hover:text-black transition-colors">
+              <h3 className="font-black text-4xl mb-2">100%</h3>
+              <p className="font-mono uppercase">Unforgettable Moments</p>
+              <p className="text-xs mt-2 opacity-75">Good lore guaranteed</p>
+            </div>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-             <div className="bg-white border-4 border-black p-4 rotate-3 shadow-[8px_8px_0px_0px_rgba(255,0,255,1)]">
-               <span className="font-black text-xl md:text-3xl uppercase">Receipts</span>
-             </div>
+          
+          <div className="bg-white text-black border-4 border-white p-6 brutal-shadow inline-block">
+            <p className="font-black text-2xl">Our Track Record:</p>
+            <p className="font-mono text-xl">Zero boring moments since 1947</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Past Trip Highlights */}
+      <section id="evidence" className="p-12 md:p-24 bg-secondary border-b-4 border-black">
+        <div className="max-w-6xl mx-auto">
+          <SectionHeading>Historical Evidence</SectionHeading>
+          <p className="font-mono text-lg mb-8">Data collected from previous Bangalore expeditions. Sample size: Every single time we've visited.</p>
+          
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform">
+              <span className="text-xs font-mono bg-black text-white px-2 py-1">March 2023</span>
+              <h3 className="font-black text-xl mt-2 mb-2">Political Car Incident</h3>
+              <p className="font-mono text-sm">Hari "accidentally" scratched a political car. The less said, the better.</p>
+            </div>
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
+              <span className="text-xs font-mono bg-primary text-white px-2 py-1">April 2025</span>
+              <h3 className="font-black text-xl mt-2 mb-2">Infinite Bread Glitch</h3>
+              <p className="font-mono text-sm">Hari unlocked a culinary secret that continues to mystify and delight.</p>
+            </div>
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform">
+              <span className="text-xs font-mono bg-accent text-black px-2 py-1">April 2025</span>
+              <h3 className="font-black text-xl mt-2 mb-2">Legendary Brownboard Discovery</h3>
+              <p className="font-mono text-sm">Hari and Sarthak unearthed a relic. Its true purpose remains a sacred mystery.</p>
+            </div>
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
+              <span className="text-xs font-mono bg-destructive text-white px-2 py-1">March 2025</span>
+              <h3 className="font-black text-xl mt-2 mb-2">Hari's First Taste</h3>
+              <p className="font-mono text-sm">Fully committed to the alcoholic experience. Cheers to new beginnings!</p>
+            </div>
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform">
+              <span className="text-xs font-mono bg-black text-white px-2 py-1">April 2025</span>
+              <h3 className="font-black text-xl mt-2 mb-2">Shreyansh & Hari's "Incident"</h3>
+              <p className="font-mono text-sm">Some lore are best left unsaid, but definitely not forgotten. 👀</p>
+            </div>
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
+              <span className="text-xs font-mono bg-primary text-white px-2 py-1">November 2025</span>
+              <h3 className="font-black text-xl mt-2 mb-2">The Balloon Mindf*ck</h3>
+              <p className="font-mono text-sm">We achieved peak communication without uttering a single word. If you know, you know.</p>
+            </div>
+          </div>
+          
+          <div className="bg-black text-white p-6 border-4 border-black text-center">
+            <p className="font-mono text-lg">Also: We're shitfaced drunk every single time, spend way too much on arcades, and Shreyansh & Hari's cricket skills get progressively worse with each match.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Photo Evidence Grid */}
+      <section className="border-b-4 border-black">
+        <div className="grid grid-cols-2 md:grid-cols-4">
+          <div className="aspect-square overflow-hidden border-2 border-black relative group">
+            <img src={imgJumpsuit} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+              "Nature Enthusiasts"
+            </div>
+          </div>
+          <div className="aspect-square overflow-hidden border-2 border-black relative group">
+            <img src={imgBowling} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+              "Adults" at Loco Bear
+            </div>
+          </div>
+          <div className="aspect-square overflow-hidden border-2 border-black relative group">
+            <img src={imgLaser} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+              Tactical Operations
+            </div>
+          </div>
+          <div className="aspect-square overflow-hidden border-2 border-black relative group">
+            <img src={imgGroupNight} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+            <div className="absolute bottom-2 left-2 bg-white border-2 border-black px-2 py-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+              Good Lore Material
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Secret Sauce */}
+      <section className="p-12 bg-white border-b-4 border-black">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl font-black mb-8">THE SECRET SAUCE</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            <span className="bg-primary text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Good People</span>
+            <span className="bg-secondary border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Bad Jokes</span>
+            <span className="bg-accent border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Great Food</span>
+            <span className="bg-black text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Random Vibes</span>
+            <span className="bg-destructive text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">LORE</span>
           </div>
         </div>
       </section>
@@ -210,28 +323,30 @@ export default function Home() {
       {/* Itinerary Section */}
       <section id="itinerary" className="border-b-4 border-black">
         <div className="bg-black text-white p-12 md:p-24 text-center border-b-4 border-white">
-          <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 text-primary">The Itinerary</h2>
-          <p className="font-mono text-xl">Carefully planned chaos by Shreyansh, random additions by Sarthak.</p>
+          <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 text-primary">The Grand Plan</h2>
+          <p className="font-mono text-xl mb-4">4 Days of Mayhem | January 23-27, 2026</p>
+          <p className="font-mono text-lg opacity-75">Carefully planned chaos by Shreyansh, random additions by Sarthak, approved by Hari</p>
         </div>
 
         {/* Day 1 */}
         <div className="grid md:grid-cols-2">
            <div className="p-12 border-b-4 md:border-b-0 md:border-r-4 border-black bg-white">
-             <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">JAN 24 • SATURDAY</span>
-             <h3 className="text-4xl font-black uppercase mb-6">Pretend Nature Enthusiasts</h3>
+             <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 1 • JAN 24 • SATURDAY</span>
+             <h3 className="text-4xl font-black uppercase mb-2">When We Pretend to be Nature Enthusiasts</h3>
+             <p className="font-mono text-sm mb-6 opacity-75">Because nothing says friendship like watching animals in their natural habitat</p>
              <ul className="space-y-4 font-mono">
                <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl">AM</span>
+                 <span className="font-black text-xl bg-secondary px-2">AM</span>
                  <div>
                    <strong className="block text-lg">Bannerghatta National Park</strong>
-                   <span className="text-sm opacity-75">Safari adventure. Lions, tigers, and bears (maybe). Butterfly park for the aesthetic.</span>
+                   <span className="text-sm opacity-75">Safari Adventure • Zoo Exploration • Butterfly Park (for the Instagram aesthetic)</span>
                  </div>
                </li>
                <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl">PM</span>
+                 <span className="font-black text-xl bg-primary text-white px-2">PM</span>
                  <div>
-                   <strong className="block text-lg">Dinner & Vibes</strong>
-                   <span className="text-sm opacity-75">Location TBD (Hari's picking). Unplanned karaoke at Sarthak's PG.</span>
+                   <strong className="block text-lg">Dinner & Night Cap</strong>
+                   <span className="text-sm opacity-75">Location TBD (Hari's picking). Dress code: Exhausted from safari. Ends at Sarthak's PG for drinks, dancing, and karaoke that will definitely wake the neighbors.</span>
                  </div>
                </li>
              </ul>
@@ -239,7 +354,7 @@ export default function Home() {
            <div className="h-64 md:h-auto border-b-4 md:border-b-0 border-black overflow-hidden relative">
               <img src={imgJumpsuit} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
               <div className="absolute bottom-4 right-4 bg-secondary border-2 border-black p-2 font-bold text-xs uppercase">
-                Figure 1: "Nature"
+                Figure 1: "Sophistication"
               </div>
            </div>
         </div>
@@ -247,27 +362,35 @@ export default function Home() {
         {/* Day 2 */}
         <div className="grid md:grid-cols-2">
            <div className="h-64 md:h-auto border-b-4 md:border-b-0 md:border-r-4 border-black overflow-hidden relative order-2 md:order-1">
-              <img src={imgBowling} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src={imgGokart} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
               <div className="absolute top-4 left-4 bg-primary text-white border-2 border-black p-2 font-bold text-xs uppercase">
                 Figure 2: "Maturity"
               </div>
            </div>
            <div className="p-12 border-b-4 md:border-b-0 border-black bg-accent order-1 md:order-2">
-             <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">JAN 25 • SUNDAY</span>
-             <h3 className="text-4xl font-black uppercase mb-6">Unlock Inner Child</h3>
+             <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 2 • JAN 25 • SUNDAY</span>
+             <h3 className="text-4xl font-black uppercase mb-2">The Day We Unlock Our Inner Child</h3>
+             <p className="font-mono text-sm mb-6">Yes, we're adults. No, we don't care.</p>
              <ul className="space-y-4 font-mono">
                <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl">AM</span>
+                 <span className="font-black text-xl bg-white px-2">AM</span>
                  <div>
                    <strong className="block text-lg">Recovery Mode</strong>
-                   <span className="text-sm opacity-75">Saturday night was spirited. Sleep in. Hydrate. No judgment.</span>
+                   <span className="text-sm opacity-75">Saturday night was spirited. Sleep in, hydrate, recover. No judgment, no rush. Bangalore time = flexible time.</span>
                  </div>
                </li>
                <li className="flex gap-4 items-start">
-                 <span className="font-black text-xl">PM</span>
+                 <span className="font-black text-xl bg-black text-white px-2">PM</span>
                  <div>
-                   <strong className="block text-lg">Play Arena & Loco Bear</strong>
-                   <span className="text-sm opacity-75">Trampolines, Go-karts, VR. Followed by craft beers (IPAs for the bold, Stouts for the adventurous).</span>
+                   <strong className="block text-lg">Play Arena</strong>
+                   <span className="text-sm opacity-75">Trampolines (defying gravity and age), Arcade Games (getting embarrassingly competitive), VR, Laser Tag, Cricket (because you know why). Testing our fitness levels (spoiler: low).</span>
+                 </div>
+               </li>
+               <li className="flex gap-4 items-start">
+                 <span className="font-black text-xl bg-primary text-white px-2">EVE</span>
+                 <div>
+                   <strong className="block text-lg">Loco Bear</strong>
+                   <span className="text-sm opacity-75">Craft beers (IPAs for the bold, Stouts for the adventurous), wings that slap, burgers that hit different. Then Church Street or Koramangala or Sarthak's Random Idea™.</span>
                  </div>
                </li>
              </ul>
@@ -275,35 +398,77 @@ export default function Home() {
         </div>
 
         {/* Day 3 */}
-        <div className="p-12 bg-secondary border-black text-center">
-            <span className="bg-white border-2 border-black font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">JAN 26 • MONDAY</span>
-            <h3 className="text-4xl md:text-6xl font-black uppercase mb-8">The Mysterious Day</h3>
-            <p className="font-mono text-xl max-w-2xl mx-auto mb-8">
-              Intentionally left flexible because A) We might be tired, B) Someone will have a brilliant idea, or C) We just drink all day (Best Option).
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-               <span className="bg-white border-2 border-black px-3 py-1 font-bold">Cubbon Park</span>
-               <span className="bg-white border-2 border-black px-3 py-1 font-bold">Food Crawl</span>
-               <span className="bg-white border-2 border-black px-3 py-1 font-bold">Nandi Hills (Lol no)</span>
+        <div className="p-12 bg-white border-b-4 border-black">
+            <div className="max-w-4xl mx-auto">
+              <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 3 • JAN 26 • MONDAY</span>
+              <h3 className="text-4xl md:text-6xl font-black uppercase mb-4">The Mysterious Day</h3>
+              <p className="font-mono text-xl mb-8">
+                This day is intentionally left flexible because:<br/>
+                A) We might be tired | B) Someone will have a brilliant idea | C) All of the above | D) Group vote decides!
+              </p>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="border-4 border-black p-4 hover:bg-secondary transition-colors">
+                  <h4 className="font-black text-lg">Option 1: Cubbon Park</h4>
+                  <p className="font-mono text-sm">Morning walks, Government Museum, pretend we're sophisticated adults, get great photos.</p>
+                </div>
+                <div className="border-4 border-black p-4 hover:bg-accent transition-colors">
+                  <h4 className="font-black text-lg">Option 2: Lumbini Gardens</h4>
+                  <p className="font-mono text-sm">Lake vibes, boating, actually relaxing. Perfect for recovering from weekend chaos.</p>
+                </div>
+                <div className="border-4 border-black p-4 hover:bg-primary hover:text-white transition-colors">
+                  <h4 className="font-black text-lg">Option 3: The Food Crawl</h4>
+                  <p className="font-mono text-sm">MTR for breakfast, Vidyarthi Bhavan for the dosa that changed lives, Indian Coffee House for vibes, Hari's secret dinner weapon.</p>
+                </div>
+                <div className="border-4 border-black p-4 bg-gray-100">
+                  <h4 className="font-black text-lg">Option 4: Nandi Hills Sunrise</h4>
+                  <p className="font-mono text-sm">⚠️ Requires 4 AM wake up. Incredible views. Reality: Sarthak will suggest this at midnight.</p>
+                </div>
+                <div className="border-4 border-black p-4 bg-destructive text-white col-span-full md:col-span-2">
+                  <h4 className="font-black text-xl">Option 5: Drink All Day (BEST OPTION)</h4>
+                  <p className="font-mono text-sm">Because sometimes, the best plan is no plan, just a continuous flow of liquid encouragement.</p>
+                </div>
+              </div>
             </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="p-12 md:p-24 bg-white border-b-4 border-black">
-        <SectionHeading>Real Testimonials</SectionHeading>
+      <section className="p-12 md:p-24 bg-muted border-b-4 border-black">
+        <SectionHeading>Totally Real Testimonials (Trust Us)</SectionHeading>
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="border-4 border-black p-6 hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <p className="font-mono text-lg mb-4">"I came a cynic, I left a changed human. My therapist is thrilled, my wallet less so."</p>
+          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <p className="font-mono text-lg mb-4">"I came a cynic, I left a changed human. My therapist is thrilled, my wallet less so, but my soul is singing!"</p>
             <div className="font-black bg-primary text-white inline-block px-2">- A Victim</div>
           </div>
-          <div className="border-4 border-black p-6 hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-gray-100">
-            <p className="font-mono text-lg mb-4">"My expectations were in the Mariana Trench. You guys dug straight through to the other side."</p>
-            <div className="font-black bg-secondary text-black inline-block px-2">- Another Victim</div>
+          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <p className="font-mono text-lg mb-4">"The food! Oh, the food! I wept. Actual tears. My entire culinary philosophy has been shattered and rebuilt."</p>
+            <div className="font-black bg-secondary text-black inline-block px-2">- Food Convert</div>
           </div>
-          <div className="border-4 border-black p-6 hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <p className="font-mono text-lg mb-4">"When's the next trip?"</p>
-            <div className="font-black bg-accent text-black inline-block px-2">- Everyone</div>
+          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <p className="font-mono text-lg mb-4">"My expectations were in the Mariana Trench. You guys not only met them but dug straight through to the other side of the planet."</p>
+            <div className="font-black bg-accent text-black inline-block px-2">- Former Skeptic</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Places Conquered */}
+      <section className="p-12 bg-black text-white border-b-4 border-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl font-black mb-8 uppercase">Places We've Conquered Together</h3>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="border-2 border-white p-4 hover:bg-primary transition-colors">
+              <h4 className="font-black text-xl">Koramangala</h4>
+              <p className="font-mono text-sm opacity-75">Every cafe, every restaurant, every hidden spot</p>
+            </div>
+            <div className="border-2 border-white p-4 hover:bg-secondary hover:text-black transition-colors">
+              <h4 className="font-black text-xl">Indiranagar</h4>
+              <p className="font-mono text-sm opacity-75">Late night walks and spontaneous decisions</p>
+            </div>
+            <div className="border-2 border-white p-4 hover:bg-accent hover:text-black transition-colors">
+              <h4 className="font-black text-xl">MG Road</h4>
+              <p className="font-mono text-sm opacity-75">Where the magic happens after sunset</p>
+            </div>
           </div>
         </div>
       </section>
@@ -311,11 +476,17 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-black text-white p-12 border-t-4 border-white text-center font-mono">
         <h2 className="text-4xl font-black mb-6 text-primary">SEE YOU IN BANGALORE</h2>
+        <p className="text-xl mb-4">"When's the next trip?" - Everyone, always</p>
         <p className="opacity-50 text-sm mb-8">
           © 2026 The Bakchod Duo & Co. All Rights Reserved.<br/>
-          Warning: We are not liable for any liver damage or lost dignity.
+          Warning: We are not liable for any liver damage, lost dignity, or legendary lore created.<br/>
+          From laser tag to late-night adventures, we know how to have a good time.
         </p>
-        <img src={imgGokart} className="w-32 h-32 object-cover rounded-full mx-auto border-4 border-white grayscale hover:grayscale-0 transition-all" />
+        <div className="flex justify-center gap-4">
+          <img src={imgGokart} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all" />
+          <img src={imgGroupNight} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all" />
+          <img src={imgLaser} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all" />
+        </div>
       </footer>
     </div>
   );
