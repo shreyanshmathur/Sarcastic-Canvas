@@ -440,10 +440,15 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="bg-white text-black border-4 border-white p-6 brutal-shadow inline-block">
+          <a 
+            href="https://en.wikipedia.org/wiki/Assassination_of_Mahatma_Gandhi" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-white text-black border-4 border-white p-6 brutal-shadow inline-block cursor-pointer hover:bg-primary hover:text-white transition-colors"
+          >
             <p className="font-black text-2xl">Our Track Record:</p>
             <p className="font-mono text-xl">Zero boring moments since 1947</p>
-          </div>
+          </a>
         </div>
       </section>
 
