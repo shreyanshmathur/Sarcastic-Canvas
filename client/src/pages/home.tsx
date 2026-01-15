@@ -11,7 +11,7 @@ import imgShreyansh from "@assets/IMG_7691_1768509225161.jpg";
 import imgHari from "@assets/c84a8361-a995-43db-92d7-10b84a982d25_1768509245380.jpg";
 import imgSarthak from "@assets/Screenshot_20220523-125146_1768509327916.jpg";
 import imgAkshith from "@assets/image_1768509418497.png";
-import imgDevayan from "@assets/image_1768510221094.png";
+import imgDevayan from "@assets/image_1768511012796.png";
 import imgLaser from "@assets/975709d9-04c6-45b1-a32a-995676c8c6ba_1768510093841.jpg";
 import imgLaser2 from "@assets/IMG_6315_1768510136872.jpg";
 import imgLaser3 from "@assets/IMG_6317_1768510136873.jpg";
@@ -31,53 +31,39 @@ const slideshowImages = [
   { src: imgElevator, caption: "Pre-gaming in the elevator because waiting is for losers", alt: "Elevator drinks" },
   { src: imgThrone, caption: "Sarthak practicing for his future as a disappointed king", alt: "Throne pose" },
   { src: imgGroupStreet, caption: "Lost tourists pretending they know where they're going", alt: "Street group" },
-  { src: imgGroupMirror, caption: "Taking mirror selfies like it's 2012", alt: "Mirror selfie" },
+  { src: imgGroupMirror, caption: "Taking mirror selfies like it's 2012. Embarrassing.", alt: "Mirror selfie" },
   { src: imgBowling, caption: "Adults at Loco Bear pretending to be functional members of society", alt: "Bowling" },
-  { src: imgGroupSunny, caption: "The squad looking for food (a recurring theme)", alt: "Sunny group" },
-  { src: imgGokart, caption: "Proof that we're just overgrown children with money", alt: "Go kart" },
-  { src: imgGroupNight, caption: "2 AM and we've already made questionable decisions", alt: "Night group" },
-  { src: imgLaser, caption: "Tactical operators with the aim of a drunk potato", alt: "Laser tag" },
-  { src: imgLaser2, caption: "Why are we taking this so seriously? Nobody knows.", alt: "Laser tag 2" },
-  { src: imgLaser3, caption: "Expendables 4: The Budget Version", alt: "Laser tag 3" },
-  { src: imgJumpsuit, caption: "Matching outfits because peer pressure is real", alt: "Jumpsuit gang" },
-  { src: imgPlayArena, caption: "Playing games is the only exercise we get", alt: "Play arena" },
-];
-
-// Devayan jumpscare messages
-const jumpscareMessages = [
-  "SURPRISE! You thought you escaped Devayan? WRONG.",
-  "BOO! Devayan is always watching. Always.",
-  "DID YOU MISS ME? Too bad. I'm here anyway.",
-  "PLOT TWIST: Devayan was behind you the whole time.",
-  "YOU CAN'T SCROLL WITHOUT DEVAYAN'S APPROVAL.",
-  "JUMPSCARE! Consider this your daily dose of chaos.",
-  "DEVAYAN HAS ENTERED THE CHAT. RUN.",
-  "THOUGHT THIS WAS A SAFE SPACE? THINK AGAIN.",
+  { src: imgGroupSunny, caption: "The squad looking for food (a recurring theme, we're basically just stomachs with legs)", alt: "Sunny group" },
+  { src: imgGokart, caption: "Proof that we're just overgrown children with money and zero emotional regulation", alt: "Go kart" },
+  { src: imgGroupNight, caption: "2 AM and we've already made decisions we'll regret by 10 AM", alt: "Night group" },
+  { src: imgLaser, caption: "Tactical operators with the aim of a drunk potato and the strategy of a confused pigeon", alt: "Laser tag" },
+  { src: imgLaser2, caption: "Why are we taking this so seriously? Nobody knows. Therapy bills incoming.", alt: "Laser tag 2" },
+  { src: imgLaser3, caption: "Expendables 4: The Budget Version (Now with 100% more disappointment)", alt: "Laser tag 3" },
+  { src: imgJumpsuit, caption: "Matching outfits because peer pressure is real and we have no personality", alt: "Jumpsuit gang" },
+  { src: imgPlayArena, caption: "Playing games is the only exercise we get. Judge us. We dare you.", alt: "Play arena" },
 ];
 
 // Devayan Jumpscare Component
 const DevayanJumpscare = () => {
   const [showJumpscare, setShowJumpscare] = useState(false);
-  const [currentMessage, setCurrentMessage] = useState("");
 
   useEffect(() => {
     const triggerJumpscare = () => {
-      const randomMessage = jumpscareMessages[Math.floor(Math.random() * jumpscareMessages.length)];
-      setCurrentMessage(randomMessage);
       setShowJumpscare(true);
       
       // Play scary sound
       const audio = new Audio("https://www.soundjay.com/misc/sounds/fail-buzzer-01.mp3");
-      audio.volume = 0.3;
-      audio.play().catch(() => {}); // Ignore autoplay restrictions
+      audio.volume = 0.4;
+      audio.play().catch(() => {});
       
-      // Hide after 2.5 seconds
-      setTimeout(() => setShowJumpscare(false), 2500);
+      // Hide after 20-40 seconds (random)
+      const displayTime = Math.floor(Math.random() * 20000) + 20000;
+      setTimeout(() => setShowJumpscare(false), displayTime);
     };
 
-    // Random interval between 25-60 seconds
+    // Random interval between 30-90 seconds
     const scheduleNextJumpscare = () => {
-      const randomDelay = Math.floor(Math.random() * 35000) + 25000;
+      const randomDelay = Math.floor(Math.random() * 60000) + 30000;
       return setTimeout(() => {
         triggerJumpscare();
         scheduleNextJumpscare();
@@ -96,43 +82,74 @@ const DevayanJumpscare = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center cursor-pointer"
+          className="fixed inset-0 z-[9999] bg-black flex flex-col md:flex-row items-center justify-center p-4 md:p-8 cursor-pointer overflow-y-auto"
           onClick={() => setShowJumpscare(false)}
         >
           <motion.div
             animate={{ 
-              rotate: [0, -5, 5, -5, 5, 0],
-              scale: [1, 1.1, 1, 1.1, 1]
+              rotate: [0, -2, 2, -2, 2, 0],
+              scale: [1, 1.02, 1, 1.02, 1]
             }}
-            transition={{ duration: 0.5, repeat: Infinity }}
-            className="relative"
+            transition={{ duration: 0.8, repeat: Infinity }}
+            className="relative mb-6 md:mb-0 md:mr-8"
           >
             <img 
               src={imgDevayan} 
               alt="DEVAYAN JUMPSCARE" 
-              className="max-w-full max-h-[60vh] object-contain border-8 border-destructive shadow-[0_0_100px_rgba(255,0,0,0.8)]"
+              className="max-w-full max-h-[40vh] md:max-h-[70vh] object-contain border-8 border-destructive shadow-[0_0_100px_rgba(255,0,0,0.8)]"
             />
           </motion.div>
-          <motion.p
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 0.3, repeat: Infinity }}
-            className="text-destructive text-3xl md:text-5xl font-black text-center mt-8 px-4 uppercase"
-            style={{ textShadow: '0 0 20px red, 0 0 40px red' }}
-          >
-            {currentMessage}
-          </motion.p>
-          <p className="text-white/50 text-sm mt-4 font-mono">(click anywhere to dismiss... if you dare)</p>
+          
+          <div className="max-w-lg text-center md:text-left">
+            <motion.h2
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 0.5, repeat: Infinity }}
+              className="text-destructive text-4xl md:text-6xl font-black uppercase mb-4"
+              style={{ textShadow: '0 0 20px red, 0 0 40px red' }}
+            >
+              DEVAYAN JUMP SCARE
+            </motion.h2>
+            
+            <h3 className="text-white text-2xl md:text-3xl font-black mb-6 uppercase">
+              The Enigma We Can't Explain
+            </h3>
+            
+            <div className="space-y-4 text-left">
+              <div className="bg-white/10 border-2 border-destructive p-3">
+                <p className="text-primary font-black text-lg uppercase">Indiranagar Enthusiast</p>
+                <p className="text-white/80 font-mono text-sm">Knows every corner of Indiranagar like the back of his hand. Suspicious? Very.</p>
+              </div>
+              
+              <div className="bg-white/10 border-2 border-destructive p-3">
+                <p className="text-secondary font-black text-lg uppercase">The Mystery Man</p>
+                <p className="text-white/80 font-mono text-sm">We tried brainstorming who he is, but he's more of a concept than a person. Philosophy majors are confused.</p>
+              </div>
+              
+              <div className="bg-white/10 border-2 border-destructive p-3">
+                <p className="text-accent font-black text-lg uppercase">Basement Population: 67+</p>
+                <p className="text-white/80 font-mono text-sm">Has 67 children in his basement (that we know of). The number keeps growing. We're scared.</p>
+              </div>
+              
+              <div className="bg-white/10 border-2 border-destructive p-3">
+                <p className="text-destructive font-black text-lg uppercase">Empire Builder</p>
+                <p className="text-white/80 font-mono text-sm">Runs an illegal drug empire bigger than Pablo Escobar's (allegedly). We have no proof. He has no alibis.</p>
+              </div>
+            </div>
+            
+            <p className="text-white/30 text-xs mt-6 font-mono">(click anywhere to escape... temporarily)</p>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
 
-const SarcasticButton = ({ children, className = "", ...props }: any) => {
+const SarcasticButton = ({ children, className = "", onClick, ...props }: any) => {
   return (
     <motion.button
       whileHover={{ scale: 1.05, rotate: -2 }}
       whileTap={{ scale: 0.95 }}
+      onClick={onClick}
       className={`bg-primary text-white border-4 border-black font-bold uppercase py-4 px-8 text-xl brutal-shadow transition-transform ${className}`}
       {...props}
     >
@@ -241,12 +258,14 @@ const PhotoSlideshow = () => {
       <button 
         onClick={scrollPrev}
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white border-4 border-black w-12 h-12 flex items-center justify-center font-black text-2xl brutal-shadow hover:bg-primary hover:text-white transition-colors z-10"
+        data-testid="slideshow-prev"
       >
         ←
       </button>
       <button 
         onClick={scrollNext}
         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white border-4 border-black w-12 h-12 flex items-center justify-center font-black text-2xl brutal-shadow hover:bg-primary hover:text-white transition-colors z-10"
+        data-testid="slideshow-next"
       >
         →
       </button>
@@ -260,6 +279,7 @@ const PhotoSlideshow = () => {
             className={`w-3 h-3 border-2 border-black transition-colors ${
               index === selectedIndex ? 'bg-primary' : 'bg-white'
             }`}
+            data-testid={`slideshow-dot-${index}`}
           />
         ))}
       </div>
@@ -268,8 +288,21 @@ const PhotoSlideshow = () => {
 };
 
 export default function Home() {
-  const handleUselessClick = () => {
-    alert("Congratulations! You clicked a button. Your life remains unchanged. See you in Bangalore anyway.");
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const handleAcceptFate = () => {
+    setShowConfirmation(true);
+    setTimeout(() => {
+      alert("CONGRATULATIONS! 🎉 You've officially signed your soul away. There's no backing out now. Pack your bags, say goodbye to your liver, and prepare for the most aggressively fun trip of your mediocre life. See you in Bangalore, LOSER! ❤️");
+      setShowConfirmation(false);
+    }, 500);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -279,15 +312,23 @@ export default function Home() {
       
       {/* Navigation */}
       <nav className="border-b-4 border-black sticky top-0 bg-white z-50 flex justify-between items-center p-4">
-        <div className="text-xl md:text-2xl font-black bg-black text-white px-2 py-1 truncate max-w-[200px] md:max-w-none">
+        <div 
+          className="text-xl md:text-2xl font-black bg-black text-white px-2 py-1 truncate max-w-[200px] md:max-w-none cursor-pointer hover:bg-primary transition-colors"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          data-testid="nav-logo"
+        >
           THE UNNECESSARY TRIP™
         </div>
         <div className="hidden md:flex gap-6 font-mono font-bold">
-          <a href="#masterminds" className="hover:underline decoration-4 decoration-primary">THE CULPRITS</a>
-          <a href="#evidence" className="hover:underline decoration-4 decoration-secondary">EVIDENCE</a>
-          <a href="#itinerary" className="hover:underline decoration-4 decoration-accent">THE CHAOS</a>
+          <button onClick={() => scrollToSection('masterminds')} className="hover:underline decoration-4 decoration-primary" data-testid="nav-culprits">THE CULPRITS</button>
+          <button onClick={() => scrollToSection('evidence')} className="hover:underline decoration-4 decoration-secondary" data-testid="nav-evidence">EVIDENCE</button>
+          <button onClick={() => scrollToSection('itinerary')} className="hover:underline decoration-4 decoration-accent" data-testid="nav-chaos">THE CHAOS</button>
         </div>
-        <button className="bg-secondary border-2 border-black px-4 py-2 font-bold uppercase hover:bg-black hover:text-white transition-colors text-sm md:text-base">
+        <button 
+          className="bg-secondary border-2 border-black px-4 py-2 font-bold uppercase hover:bg-black hover:text-white transition-colors text-sm md:text-base"
+          onClick={() => scrollToSection('itinerary')}
+          data-testid="nav-date"
+        >
           Jan 23-27
         </button>
       </nav>
@@ -306,7 +347,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="bg-destructive text-white border-4 border-black p-2 mb-6 inline-block transform rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
           >
-            <span className="font-mono text-lg md:text-xl font-bold uppercase">⚠️ URGENT: This Could've Been a Text ⚠️</span>
+            <span className="font-mono text-lg md:text-xl font-bold uppercase">⚠️ URGENT: This Could've Been a WhatsApp Message But We're Extra ⚠️</span>
           </motion.div>
           
           <motion.h1 
@@ -325,7 +366,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="text-xl md:text-2xl font-mono font-bold mb-4 bg-white inline-block px-4 py-2 border-2 border-black rotate-1"
           >
-            But here we are with 60 slides instead.
+            You're about to waste precious minutes of your life reading this. Worth it? Probably not.
           </motion.p>
           
           <motion.p 
@@ -334,24 +375,24 @@ export default function Home() {
             transition={{ delay: 0.4 }}
             className="text-lg font-mono mb-10 bg-secondary inline-block px-3 py-1 border-2 border-black -rotate-1"
           >
-            Buckle up, this is happening.
+            Buckle up buttercup, this train has no brakes.
           </motion.p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
-             <SarcasticButton onClick={handleUselessClick}>
-              Accept Your Fate
+             <SarcasticButton onClick={handleAcceptFate} data-testid="accept-fate-btn">
+              Accept Your Fate (No Refunds)
             </SarcasticButton>
-            <span className="font-mono text-sm bg-black text-white p-2">Jan 23-27, 2026 | Because regular invites are too mainstream</span>
+            <span className="font-mono text-sm bg-black text-white p-2">Jan 23-27, 2026 | Because regular invites are for boring people</span>
           </div>
           
           <div className="bg-white border-4 border-black p-4 max-w-md mx-auto brutal-shadow">
-            <p className="font-black text-lg mb-2">Why does this presentation exist?</p>
+            <p className="font-black text-lg mb-2">Why does this website exist?</p>
             <div className="grid grid-cols-3 gap-2 text-xs font-mono">
               <div className="bg-gray-100 p-2 border border-black">
-                <strong>Option A:</strong><br/>Too much free time
+                <strong>Option A:</strong><br/>We have too much free time and no hobbies
               </div>
               <div className="bg-gray-100 p-2 border border-black">
-                <strong>Option B:</strong><br/>We wanted to annoy you
+                <strong>Option B:</strong><br/>We wanted to annoy you specifically
               </div>
               <div className="bg-primary text-white p-2 border border-black">
                 <strong>Option C:</strong><br/>All of the above ✓
@@ -365,9 +406,9 @@ export default function Home() {
       <section className="border-b-4 border-black bg-black p-8 md:p-12">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-black text-white text-center mb-8 uppercase">
-            More Evidence of Our <span className="text-primary">Shenanigans</span>
+            Photographic Evidence of Our <span className="text-primary">Poor Life Choices</span>
           </h2>
-          <p className="text-white font-mono text-center mb-8 opacity-75">Hover for the real story behind each photo</p>
+          <p className="text-white font-mono text-center mb-8 opacity-75">Hover for the brutal truth behind each carefully curated lie</p>
           <PhotoSlideshow />
         </div>
       </section>
@@ -375,40 +416,40 @@ export default function Home() {
       {/* The Masterminds Section */}
       <section id="masterminds" className="p-12 md:p-24 bg-accent border-b-4 border-black">
         <div className="max-w-7xl mx-auto">
-          <SectionHeading className="bg-white px-4 transform -rotate-1">The Masterminds Behind This Chaos</SectionHeading>
+          <SectionHeading className="bg-white px-4 transform -rotate-1">The Masterminds Behind This Trainwreck</SectionHeading>
           <p className="text-xl font-bold mb-12 max-w-2xl bg-white border-2 border-black p-4">
-            Introducing: The quartet nobody asked for but everyone's stuck with.
+            Introducing: The quartet nobody asked for, nobody wanted, but everyone's stuck with anyway. You're welcome.
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
             <CharacterCard 
               name="Shreyansh"
-              role="The Logistics Guy"
+              role="The Logistics Overlord"
               img={imgShreyansh}
-              desc="Half of 'The Bakchod Duo'. The person who actually knows what's happening, unlike the others. Will do anything for content."
-              stats={["Spreadsheets for his spreadsheets", "47 reminder messages incoming", "Has planned your bathroom breaks"]}
+              desc="Half of 'The Bakchod Duo'. The only person who actually knows what's happening. Will sell his kidney for content. Has a spreadsheet addiction that requires intervention."
+              stats={["Spreadsheets for his spreadsheets for his spreadsheets", "Will send you 47 reminders (minimum)", "Has planned your bathroom breaks (yes, really)"]}
             />
             <CharacterCard 
               name="Sarthak"
-              role="Designated Bartender"
+              role="Chief Chaos Officer"
               img={imgSarthak}
-              desc="His answer to every question? 'Chalo daru pite hai'. Plans are merely suggestions. 'Trust me bro' is his life motto."
-              stats={["'What if we just climb that?'", "'Why would we need a reservation?'", "Finds spots Google doesn't know"]}
+              desc="His answer to literally everything? 'Chalo daru pite hai'. Plans are merely suggestions he ignores. 'Trust me bro' - famous last words before disaster."
+              stats={["'What if we just climb that?' - moments before tragedy", "'Why would we need a reservation?' - said confidently, wrongly", "Finds spots even Google is scared of"]}
             />
             <CharacterCard 
               name="Hari"
-              role="Adventure Architect"
+              role="The Human GPS (Allegedly)"
               img={imgHari}
-              desc="One half of 'The Bakchod Duo'. Your personal guide to the city's legendary street food scene. Never uses GPS because he IS the GPS."
-              stats={["Pro Yulu Rider (questionable)", "Knows every shortcut", "Food Oracle extraordinaire"]}
+              desc="One half of 'The Bakchod Duo'. Claims to never need GPS because he IS the GPS. Spoiler: He's gotten us lost 47 times. But the street food finds? *Chef's kiss*"
+              stats={["Pro Yulu Rider (citation needed)", "Knows shortcuts that add 2 hours", "Food Oracle but make it chaotic"]}
             />
              <CharacterCard 
               name="Akshith"
-              role="Corporate Professional (Sort Of)"
+              role="Corporate Disappointment"
               img={imgAkshith}
               objectPosition="top"
-              desc="The shortest in the group and not the highest in the room. Works at the 'most prestigious firm' (his words, not ours)."
-              stats={["Alcohol Tolerance: -5", "First to pass out, guaranteed", "'Krishna ji sab dekh rahe hain'"]}
+              desc="The shortest in the group and somehow also the shortest on brain cells after one drink. Works at 'the most prestigious firm' (his mom told him that)."
+              stats={["Alcohol Tolerance: Negative infinity", "First to pass out, first to deny it", "'Krishna ji dekh rahe hain' - said while ordering another"]}
             />
           </div>
         </div>
@@ -419,24 +460,24 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 text-primary">Why You Should Actually Come</h2>
           <p className="font-mono text-2xl mb-12 bg-white text-black inline-block px-4 py-2 border-2 border-white rotate-1">
-            (Yeh Dhamki hai! Also we made 60 slides)
+            (This is a threat wrapped in an invitation. You've been warned.)
           </p>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="border-4 border-white p-6 hover:bg-primary transition-colors">
+            <div className="border-4 border-white p-6 hover:bg-primary transition-colors cursor-pointer" onClick={() => scrollToSection('evidence')}>
               <h3 className="font-black text-4xl mb-2">98%</h3>
               <p className="font-mono uppercase">Probability of Chaos</p>
-              <p className="text-xs mt-2 opacity-75">In the best way possible</p>
+              <p className="text-xs mt-2 opacity-75">The remaining 2% is when we're sleeping (barely)</p>
             </div>
-            <div className="border-4 border-white p-6 hover:bg-secondary hover:text-black transition-colors">
+            <div className="border-4 border-white p-6 hover:bg-secondary hover:text-black transition-colors cursor-pointer" onClick={() => scrollToSection('evidence')}>
               <h3 className="font-black text-4xl mb-2">87%</h3>
               <p className="font-mono uppercase">Laughter Quotient</p>
-              <p className="text-xs mt-2 opacity-75">Your abs will hurt</p>
+              <p className="text-xs mt-2 opacity-75">Your abs will hurt. Your dignity won't survive.</p>
             </div>
-            <div className="border-4 border-white p-6 hover:bg-accent hover:text-black transition-colors">
+            <div className="border-4 border-white p-6 hover:bg-accent hover:text-black transition-colors cursor-pointer" onClick={() => scrollToSection('evidence')}>
               <h3 className="font-black text-4xl mb-2">100%</h3>
-              <p className="font-mono uppercase">Unforgettable Moments</p>
-              <p className="text-xs mt-2 opacity-75">Good lore guaranteed</p>
+              <p className="font-mono uppercase">Regrettable Decisions</p>
+              <p className="text-xs mt-2 opacity-75">Good stories guaranteed. Therapy bills not included.</p>
             </div>
           </div>
           
@@ -445,6 +486,7 @@ export default function Home() {
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-white text-black border-4 border-white p-6 brutal-shadow inline-block cursor-pointer hover:bg-primary hover:text-white transition-colors"
+            data-testid="track-record-link"
           >
             <p className="font-black text-2xl">Our Track Record:</p>
             <p className="font-mono text-xl">Zero boring moments since 1947</p>
@@ -455,44 +497,44 @@ export default function Home() {
       {/* Past Trip Highlights */}
       <section id="evidence" className="p-12 md:p-24 bg-secondary border-b-4 border-black">
         <div className="max-w-6xl mx-auto">
-          <SectionHeading>Historical Evidence</SectionHeading>
-          <p className="font-mono text-lg mb-8">Data collected from previous Bangalore expeditions. Sample size: Every single time we've visited.</p>
+          <SectionHeading>Exhibit A: The Crime Scene Photos</SectionHeading>
+          <p className="font-mono text-lg mb-8">Data collected from previous Bangalore disasters. Sample size: Every single time we've traumatized this city.</p>
           
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-black text-white px-2 py-1">March 2023</span>
-              <h3 className="font-black text-xl mt-2 mb-2">Political Car Incident</h3>
-              <p className="font-mono text-sm">Hari "accidentally" scratched a political car. The less said, the better.</p>
+              <h3 className="font-black text-xl mt-2 mb-2">The Political Car Incident™</h3>
+              <p className="font-mono text-sm">Hari "accidentally" scratched a political car. Our insurance company still sends us hate mail. The less said, the better.</p>
             </div>
-            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-primary text-white px-2 py-1">April 2025</span>
               <h3 className="font-black text-xl mt-2 mb-2">Infinite Bread Glitch</h3>
-              <p className="font-mono text-sm">Hari unlocked a culinary secret that continues to mystify and delight.</p>
+              <p className="font-mono text-sm">Hari unlocked a culinary exploit that defies physics and restaurant economics. Scientists are baffled. We're just hungry.</p>
             </div>
-            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-accent text-black px-2 py-1">April 2025</span>
               <h3 className="font-black text-xl mt-2 mb-2">Legendary Brownboard Discovery</h3>
-              <p className="font-mono text-sm">Hari and Sarthak unearthed a relic. Its true purpose remains a sacred mystery.</p>
+              <p className="font-mono text-sm">Hari and Sarthak unearthed a relic. Its true purpose remains a sacred mystery. The cult is growing.</p>
             </div>
-            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-destructive text-white px-2 py-1">March 2025</span>
               <h3 className="font-black text-xl mt-2 mb-2">Hari's First Taste</h3>
-              <p className="font-mono text-sm">Fully committed to the alcoholic experience. Cheers to new beginnings!</p>
+              <p className="font-mono text-sm">Fully committed to the alcoholic experience. His liver filed a restraining order. Cheers to new beginnings and bad decisions!</p>
             </div>
-            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:-rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-black text-white px-2 py-1">April 2025</span>
               <h3 className="font-black text-xl mt-2 mb-2">Shreyansh & Hari's "Incident"</h3>
-              <p className="font-mono text-sm">Some lore are best left unsaid, but definitely not forgotten. 👀</p>
+              <p className="font-mono text-sm">Some lore are best left in the group chat graveyard, but definitely not forgotten. The witnesses are sworn to secrecy. 👀</p>
             </div>
-            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform">
+            <div className="bg-white border-4 border-black p-4 brutal-shadow hover:rotate-1 transition-transform cursor-pointer">
               <span className="text-xs font-mono bg-primary text-white px-2 py-1">November 2025</span>
               <h3 className="font-black text-xl mt-2 mb-2">The Balloon Mindf*ck</h3>
-              <p className="font-mono text-sm">We achieved peak communication without uttering a single word. If you know, you know.</p>
+              <p className="font-mono text-sm">We achieved peak communication without uttering a single word. Telepathy? Collective brain damage? Yes.</p>
             </div>
           </div>
           
           <div className="bg-black text-white p-6 border-4 border-black text-center">
-            <p className="font-mono text-lg">Also: We're shitfaced drunk every single time, spend way too much on arcades, and Shreyansh & Hari's cricket skills get progressively worse with each match.</p>
+            <p className="font-mono text-lg">Also: We're shitfaced drunk every single time, spend way too much on arcades like functioning adults, and Shreyansh & Hari's cricket skills get progressively worse with each drink (which is saying something).</p>
           </div>
         </div>
       </section>
@@ -500,13 +542,13 @@ export default function Home() {
       {/* Secret Sauce */}
       <section className="p-12 bg-white border-b-4 border-black">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-3xl font-black mb-8 uppercase">THE SECRET SAUCE</h3>
+          <h3 className="text-3xl font-black mb-8 uppercase">THE SECRET SAUCE (It's Mostly Alcohol)</h3>
           <div className="flex flex-wrap justify-center gap-4">
-            <span className="bg-primary text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Good People</span>
-            <span className="bg-secondary border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Bad Jokes</span>
-            <span className="bg-accent border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Great Food</span>
-            <span className="bg-black text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">Random Vibes</span>
-            <span className="bg-destructive text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow">LORE</span>
+            <span className="bg-primary text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow hover:rotate-2 transition-transform cursor-pointer">Questionable People</span>
+            <span className="bg-secondary border-4 border-black px-6 py-3 font-black text-xl brutal-shadow hover:-rotate-2 transition-transform cursor-pointer">Worse Jokes</span>
+            <span className="bg-accent border-4 border-black px-6 py-3 font-black text-xl brutal-shadow hover:rotate-2 transition-transform cursor-pointer">Suspicious Food</span>
+            <span className="bg-black text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow hover:-rotate-2 transition-transform cursor-pointer">Chaotic Energy</span>
+            <span className="bg-destructive text-white border-4 border-black px-6 py-3 font-black text-xl brutal-shadow hover:rotate-2 transition-transform cursor-pointer">BLACKMAIL MATERIAL</span>
           </div>
         </div>
       </section>
@@ -514,9 +556,9 @@ export default function Home() {
       {/* Itinerary Section */}
       <section id="itinerary" className="border-b-4 border-black">
         <div className="bg-black text-white p-12 md:p-24 text-center border-b-4 border-white">
-          <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 text-primary">The Grand Plan</h2>
-          <p className="font-mono text-xl mb-4">4 Days of Mayhem | January 23-27, 2026</p>
-          <p className="font-mono text-lg opacity-75">Carefully planned chaos by Shreyansh, random additions by Sarthak, approved by Hari</p>
+          <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 text-primary">The Grand Masterplan</h2>
+          <p className="font-mono text-xl mb-4">4 Days of Organized Chaos | January 23-27, 2026</p>
+          <p className="font-mono text-lg opacity-75">Carefully planned by Shreyansh, immediately ruined by Sarthak, reluctantly approved by Hari</p>
         </div>
 
         {/* Day 1 */}
@@ -524,20 +566,20 @@ export default function Home() {
            <div className="p-12 border-b-4 md:border-b-0 md:border-r-4 border-black bg-white">
              <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 1 • JAN 24 • SATURDAY</span>
              <h3 className="text-4xl font-black uppercase mb-2">When We Pretend to be Nature Enthusiasts</h3>
-             <p className="font-mono text-sm mb-6 opacity-75">Because nothing says friendship like watching animals in their natural habitat</p>
+             <p className="font-mono text-sm mb-6 opacity-75">Because nothing says friendship like watching animals judge our life choices</p>
              <ul className="space-y-4 font-mono">
                <li className="flex gap-4 items-start">
                  <span className="font-black text-xl bg-secondary px-2">AM</span>
                  <div>
                    <strong className="block text-lg">Bannerghatta National Park</strong>
-                   <span className="text-sm opacity-75">Safari Adventure • Zoo Exploration • Butterfly Park (for the Instagram aesthetic)</span>
+                   <span className="text-sm opacity-75">Safari Adventure • Zoo Exploration • Butterfly Park (for the Instagram aesthetic we desperately need)</span>
                  </div>
                </li>
                <li className="flex gap-4 items-start">
                  <span className="font-black text-xl bg-primary text-white px-2">PM</span>
                  <div>
-                   <strong className="block text-lg">Dinner & Night Cap</strong>
-                   <span className="text-sm opacity-75">Location TBD (Hari's picking). Dress code: Exhausted from safari. Ends at Sarthak's PG for drinks, dancing, and karaoke that will definitely wake the neighbors.</span>
+                   <strong className="block text-lg">Dinner & Night Cap (More Like Night Bottle)</strong>
+                   <span className="text-sm opacity-75">Location TBD (Hari's picking, pray for us). Dress code: Exhausted from safari, dead inside. Ends at Sarthak's PG for drinks, dancing, and karaoke that will definitely get us evicted.</span>
                  </div>
                </li>
              </ul>
@@ -545,7 +587,7 @@ export default function Home() {
            <div className="h-64 md:h-auto border-b-4 md:border-b-0 border-black overflow-hidden relative">
               <img src={imgJumpsuit} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
               <div className="absolute bottom-4 right-4 bg-secondary border-2 border-black p-2 font-bold text-xs uppercase">
-                Figure 1: "Sophistication"
+                Figure 1: "Sophistication" (Delusional)
               </div>
            </div>
         </div>
@@ -555,33 +597,33 @@ export default function Home() {
            <div className="h-64 md:h-auto border-b-4 md:border-b-0 md:border-r-4 border-black overflow-hidden relative order-2 md:order-1">
               <img src={imgGokart} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
               <div className="absolute top-4 left-4 bg-primary text-white border-2 border-black p-2 font-bold text-xs uppercase">
-                Figure 2: "Maturity"
+                Figure 2: "Maturity" (Non-existent)
               </div>
            </div>
            <div className="p-12 border-b-4 md:border-b-0 border-black bg-accent order-1 md:order-2">
              <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 2 • JAN 25 • SUNDAY</span>
-             <h3 className="text-4xl font-black uppercase mb-2">The Day We Unlock Our Inner Child</h3>
-             <p className="font-mono text-sm mb-6">Yes, we're adults. No, we don't care.</p>
+             <h3 className="text-4xl font-black uppercase mb-2">The Day We Abandon Adulthood Entirely</h3>
+             <p className="font-mono text-sm mb-6">Yes, we're adults. No, we don't act like it. Problem?</p>
              <ul className="space-y-4 font-mono">
                <li className="flex gap-4 items-start">
                  <span className="font-black text-xl bg-white px-2">AM</span>
                  <div>
-                   <strong className="block text-lg">Recovery Mode</strong>
-                   <span className="text-sm opacity-75">Saturday night was spirited. Sleep in, hydrate, recover. No judgment, no rush. Bangalore time = flexible time.</span>
+                   <strong className="block text-lg">Recovery Mode (Survival Mode)</strong>
+                   <span className="text-sm opacity-75">Saturday night was a war zone. Sleep in, hydrate aggressively, question your life choices. No judgment, no rush, no dignity left.</span>
                  </div>
                </li>
                <li className="flex gap-4 items-start">
                  <span className="font-black text-xl bg-black text-white px-2">PM</span>
                  <div>
-                   <strong className="block text-lg">Play Arena</strong>
-                   <span className="text-sm opacity-75">Trampolines (defying gravity and age), Arcade Games (getting embarrassingly competitive), VR, Laser Tag, Cricket (because you know why). Testing our fitness levels (spoiler: low).</span>
+                   <strong className="block text-lg">Play Arena (Adults Playing Kids' Games)</strong>
+                   <span className="text-sm opacity-75">Trampolines (defying gravity and our age), Arcade Games (getting embarrassingly competitive over meaningless prizes), VR, Laser Tag, Cricket (because ego issues).</span>
                  </div>
                </li>
                <li className="flex gap-4 items-start">
                  <span className="font-black text-xl bg-primary text-white px-2">EVE</span>
                  <div>
-                   <strong className="block text-lg">Loco Bear</strong>
-                   <span className="text-sm opacity-75">Craft beers (IPAs for the bold, Stouts for the adventurous), wings that slap, burgers that hit different. Then Church Street or Koramangala or Sarthak's Random Idea™.</span>
+                   <strong className="block text-lg">Loco Bear (Bad Decisions Central)</strong>
+                   <span className="text-sm opacity-75">Craft beers (IPAs for pretentious people, Stouts for masochists), wings that slap, burgers that hit different. Then Church Street or wherever Sarthak's Random Idea™ takes us.</span>
                  </div>
                </li>
              </ul>
@@ -591,33 +633,33 @@ export default function Home() {
         {/* Day 3 */}
         <div className="p-12 bg-white border-b-4 border-black">
             <div className="max-w-4xl mx-auto">
-              <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 3 • JAN 26 • MONDAY</span>
-              <h3 className="text-4xl md:text-6xl font-black uppercase mb-4">The Mysterious Day</h3>
+              <span className="bg-black text-white font-mono px-2 py-1 text-sm font-bold mb-4 inline-block">DAY 3 • JAN 26 • MONDAY (REPUBLIC DAY - IRONIC)</span>
+              <h3 className="text-4xl md:text-6xl font-black uppercase mb-4">The Mysterious Day (We Have No Plan)</h3>
               <p className="font-mono text-xl mb-8">
                 This day is intentionally left flexible because:<br/>
-                A) We might be tired | B) Someone will have a brilliant idea | C) All of the above | D) Group vote decides!
+                A) We might be physically deceased | B) Someone will have a terrible idea we'll follow anyway | C) Democracy decides (scary) | D) All of the above (likely)
               </p>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="border-4 border-black p-4 hover:bg-secondary transition-colors">
+                <div className="border-4 border-black p-4 hover:bg-secondary transition-colors cursor-pointer">
                   <h4 className="font-black text-lg">Option 1: Cubbon Park</h4>
-                  <p className="font-mono text-sm">Morning walks, Government Museum, pretend we're sophisticated adults, get great photos.</p>
+                  <p className="font-mono text-sm">Morning walks, Government Museum, pretend we're sophisticated adults who read books and have opinions.</p>
                 </div>
-                <div className="border-4 border-black p-4 hover:bg-accent transition-colors">
+                <div className="border-4 border-black p-4 hover:bg-accent transition-colors cursor-pointer">
                   <h4 className="font-black text-lg">Option 2: Lumbini Gardens</h4>
-                  <p className="font-mono text-sm">Lake vibes, boating, actually relaxing. Perfect for recovering from weekend chaos.</p>
+                  <p className="font-mono text-sm">Lake vibes, boating, actually relaxing for once. Perfect for recovering from weekend carnage.</p>
                 </div>
-                <div className="border-4 border-black p-4 hover:bg-primary hover:text-white transition-colors">
+                <div className="border-4 border-black p-4 hover:bg-primary hover:text-white transition-colors cursor-pointer">
                   <h4 className="font-black text-lg">Option 3: The Food Crawl</h4>
-                  <p className="font-mono text-sm">MTR for breakfast, Vidyarthi Bhavan for the dosa that changed lives, Indian Coffee House for vibes, Hari's secret dinner weapon.</p>
+                  <p className="font-mono text-sm">MTR for breakfast, Vidyarthi Bhavan for the life-changing dosa, Indian Coffee House for pretentious vibes, Hari's secret dinner weapon.</p>
                 </div>
-                <div className="border-4 border-black p-4 bg-gray-100">
+                <div className="border-4 border-black p-4 bg-gray-100 cursor-pointer">
                   <h4 className="font-black text-lg">Option 4: Nandi Hills Sunrise</h4>
-                  <p className="font-mono text-sm">⚠️ Requires 4 AM wake up. Incredible views. Reality: Sarthak will suggest this at midnight.</p>
+                  <p className="font-mono text-sm">⚠️ Requires 4 AM wake up. Views are incredible. Reality: Sarthak will suggest this at midnight after 6 drinks.</p>
                 </div>
-                <div className="border-4 border-black p-4 bg-destructive text-white col-span-full md:col-span-2">
-                  <h4 className="font-black text-xl">Option 5: Drink All Day (BEST OPTION)</h4>
-                  <p className="font-mono text-sm">Because sometimes, the best plan is no plan, just a continuous flow of liquid encouragement.</p>
+                <div className="border-4 border-black p-4 bg-destructive text-white col-span-full md:col-span-2 cursor-pointer hover:scale-105 transition-transform">
+                  <h4 className="font-black text-xl">Option 5: Drink All Day (THE ONLY CORRECT OPTION)</h4>
+                  <p className="font-mono text-sm">Because sometimes, the best plan is no plan—just a continuous flow of liquid encouragement and poor decisions. Liver damage is temporary, memories are forever (or forgotten).</p>
                 </div>
               </div>
             </div>
@@ -626,19 +668,19 @@ export default function Home() {
 
       {/* Testimonials */}
       <section className="p-12 md:p-24 bg-muted border-b-4 border-black">
-        <SectionHeading>Totally Real Testimonials (Trust Us)</SectionHeading>
+        <SectionHeading>Totally Real Testimonials (We Didn't Make These Up)</SectionHeading>
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <p className="font-mono text-lg mb-4">"I came a cynic, I left a changed human. My therapist is thrilled, my wallet less so, but my soul is singing!"</p>
-            <div className="font-black bg-primary text-white inline-block px-2">- A Victim</div>
+          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
+            <p className="font-mono text-lg mb-4">"I came a cynic, I left a changed human. My therapist is thrilled about the job security, my wallet weeps, but my soul is confused!"</p>
+            <div className="font-black bg-primary text-white inline-block px-2">- A Victim (Stockholm Syndrome)</div>
           </div>
-          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <p className="font-mono text-lg mb-4">"The food! Oh, the food! I wept. Actual tears. My entire culinary philosophy has been shattered and rebuilt."</p>
-            <div className="font-black bg-secondary text-black inline-block px-2">- Food Convert</div>
+          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
+            <p className="font-mono text-lg mb-4">"The food! Oh, the food! I wept. Actual tears. My entire culinary philosophy has been shattered, rebuilt, and then shattered again."</p>
+            <div className="font-black bg-secondary text-black inline-block px-2">- Food Convert (Now Overweight)</div>
           </div>
-          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <p className="font-mono text-lg mb-4">"My expectations were in the Mariana Trench. You guys not only met them but dug straight through to the other side of the planet."</p>
-            <div className="font-black bg-accent text-black inline-block px-2">- Former Skeptic</div>
+          <div className="border-4 border-black p-6 bg-white hover:-translate-y-2 transition-transform shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
+            <p className="font-mono text-lg mb-4">"My expectations were in the Mariana Trench. These idiots not only met them but dug straight through to the other side of the planet. I'm scared."</p>
+            <div className="font-black bg-accent text-black inline-block px-2">- Former Skeptic (Now Believer)</div>
           </div>
         </div>
       </section>
@@ -646,19 +688,19 @@ export default function Home() {
       {/* Places Conquered */}
       <section className="p-12 bg-black text-white border-b-4 border-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-3xl font-black mb-8 uppercase">Places We've Conquered Together</h3>
+          <h3 className="text-3xl font-black mb-8 uppercase">Places We've Traumatized Together</h3>
           <div className="grid grid-cols-3 gap-4">
-            <div className="border-2 border-white p-4 hover:bg-primary transition-colors">
+            <div className="border-2 border-white p-4 hover:bg-primary transition-colors cursor-pointer">
               <h4 className="font-black text-xl">Koramangala</h4>
-              <p className="font-mono text-sm opacity-75">Every cafe, every restaurant, every hidden spot</p>
+              <p className="font-mono text-sm opacity-75">Every cafe, every restaurant, every hidden spot that regrets serving us</p>
             </div>
-            <div className="border-2 border-white p-4 hover:bg-secondary hover:text-black transition-colors">
+            <div className="border-2 border-white p-4 hover:bg-secondary hover:text-black transition-colors cursor-pointer">
               <h4 className="font-black text-xl">Indiranagar</h4>
-              <p className="font-mono text-sm opacity-75">Late night walks and spontaneous decisions</p>
+              <p className="font-mono text-sm opacity-75">Late night walks and decisions our future selves hate</p>
             </div>
-            <div className="border-2 border-white p-4 hover:bg-accent hover:text-black transition-colors">
+            <div className="border-2 border-white p-4 hover:bg-accent hover:text-black transition-colors cursor-pointer">
               <h4 className="font-black text-xl">MG Road</h4>
-              <p className="font-mono text-sm opacity-75">Where the magic happens after sunset</p>
+              <p className="font-mono text-sm opacity-75">Where the magic happens (and by magic, we mean chaos)</p>
             </div>
           </div>
         </div>
@@ -666,18 +708,20 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-black text-white p-12 border-t-4 border-white text-center font-mono">
-        <h2 className="text-4xl font-black mb-6 text-primary">SEE YOU IN BANGALORE</h2>
-        <p className="text-xl mb-4">"When's the next trip?" - Everyone, always</p>
+        <h2 className="text-4xl font-black mb-6 text-primary">SEE YOU IN BANGALORE (OR ELSE)</h2>
+        <p className="text-xl mb-4">"When's the next trip?" - Everyone, immediately regretting asking</p>
         <p className="opacity-50 text-sm mb-8">
-          © 2026 The Bakchod Duo & Co. All Rights Reserved.<br/>
-          Warning: We are not liable for any liver damage, lost dignity, or legendary lore created.<br/>
-          From laser tag to late-night adventures, we know how to have a good time.
+          © 2026 The Bakchod Duo & Co. All Rights Reserved. Some Rights Questionable.<br/>
+          Warning: We are not liable for any liver damage, lost dignity, empty wallets, or legendary lore created.<br/>
+          Side effects may include: Excessive laughter, poor decisions, and an inexplicable urge to return.<br/>
+          From laser tag to late-night disasters, we know how to have a "good" time.
         </p>
         <div className="flex justify-center gap-4">
-          <img src={imgGokart} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all" />
-          <img src={imgGroupNight} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all" />
-          <img src={imgLaser} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all" />
+          <img src={imgGokart} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all cursor-pointer" />
+          <img src={imgGroupNight} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all cursor-pointer" />
+          <img src={imgLaser} className="w-24 h-24 object-cover rounded-full border-4 border-white grayscale hover:grayscale-0 transition-all cursor-pointer" />
         </div>
+        <p className="mt-8 text-xs opacity-30">P.S. If you scrolled this far, you're already committed. There's no escape now. See you soon, victim. ❤️</p>
       </footer>
     </div>
   );
