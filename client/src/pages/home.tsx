@@ -8,6 +8,7 @@ import imgElevator from "@assets/11ae7186-78fa-4535-bda9-9f49673464b8_1768509073
 import imgThrone from "@assets/Screenshot_20220523-125146_1768509073013.jpg";
 import imgShreyansh from "@assets/IMG_7691_1768509225161.jpg";
 import imgHari from "@assets/c84a8361-a995-43db-92d7-10b84a982d25_1768509245380.jpg";
+import imgSarthak from "@assets/Screenshot_20220523-125146_1768509327916.jpg";
 import imgLaser from "@assets/975709d9-04c6-45b1-a32a-995676c8c6ba_1768509073019.jpg";
 import imgJumpsuit from "@assets/6c806d63-2d1c-4858-8357-565a5d1edd2a_1768509073021.jpg";
 import imgBowling from "@assets/8c4b0d7a-78c3-446f-bac7-98e76eadd6b2_1768509073016.jpg";
@@ -141,7 +142,7 @@ export default function Home() {
             <CharacterCard 
               name="Sarthak"
               role="Designated Bartender"
-              img={imgElevator}
+              img={imgSarthak}
               desc="Answer to everything: 'Chalo daru pite hai'. Spontaneity Level: 1000. Plans are merely suggestions."
               stats={["Climbs Random Things", "Finds Spots Google Doesn't Know", "Motto: 'Trust me bro'"]}
             />
